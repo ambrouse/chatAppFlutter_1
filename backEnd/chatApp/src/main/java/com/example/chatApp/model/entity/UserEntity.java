@@ -1,10 +1,7 @@
 package com.example.chatApp.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
@@ -13,6 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name ="user_")
 public class UserEntity {
@@ -25,7 +23,7 @@ public class UserEntity {
     @Column(name = "name_")
     String name_;
     @Column(name = "age_")
-    String age_;
+    int age_;
     @Column(name = "status_delete_")
     Integer statusDelete_;
     @Column(name = "day_delete_")

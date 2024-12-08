@@ -2,9 +2,12 @@ package com.example.chatApp.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -17,12 +20,14 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import javax.crypto.spec.SecretKeySpec;
-
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
 public class SecuritySetting {
-    private final String[] link_not_securiry = {"/chat_app/api/v1/login","/chat_app/api/v1/sigup","/chat_app/api/v1/friends","chat_app/api/v1/user/{id_user}," +
-            "/chat_app/api/v1/user/{id_user}","/chat_app/api/v1/my_blog/{id_user}","chat_app/api/v1/my_blog/{id_blog}","chat_app/api/v1/request_friend/{id_user}",
+    private final String[] link_not_securiry = {"/chat_app/api/v1/login","/chat_app/api/v1/sigup","/chat_app/api/v1/friends","chat_app/api/v1/user/{id_user}"
+            ,"/chat_app/api/v1/my_blog/{id_user}","chat_app/api/v1/my_blog/{id_blog}","chat_app/api/v1/request_friend/{id_user}",
             "/chat_app/api/v1/request_friend","/chat_app/api/v1/chat/{id_link_user}","/chat_app/api/v1/chat","/chat_app/api/v1/blog/{id_user}","/chat_app/api/v1/blog",
-            "/chat_app /api/v1/blog_like","/chat_app /api/v1/blog_heart"};
+            "/chat_app/api/v1/blog_like","/chat_app /api/v1/blog_heart","/chat_app/api/v1/test"};
 
     @Value("${jwt.create_token_key}")
     private String sereckey;
