@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("${rootApi.url}")
 public class HomeController {
@@ -17,15 +19,9 @@ public class HomeController {
     HomeServiece homeServiece;
 
     @GetMapping("/friends")
-    public ApiRespone<ListFriendRespone> getListFriend(@RequestParam(name = "id_user",required = false) String idUser,
-                                                       @RequestParam(name = "name",required = false) String name){
+    public ApiRespone<List<ListFriendRespone>> getListFriend(@RequestParam(name = "id_user",required = false) String idUser,
+                                                            @RequestParam(name = "name",required = false) String name){
 
         return homeServiece.getListFriend(idUser,name);
-    }
-
-    @GetMapping("/test")
-    public String t(){
-
-        return "homeServiece.getListFriend(idUser,name)";
     }
 }

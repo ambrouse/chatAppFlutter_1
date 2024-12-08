@@ -18,4 +18,5 @@ public interface AuthenticationRepo extends JpaRepository<AuthenticationEntity,S
             "where email_ = :email_ and password_ = :password_",nativeQuery = true)
     Tuple getAUByEmailPassword(@Param("email_") String email_,
                                @Param("password_") String password_);
+
 }
