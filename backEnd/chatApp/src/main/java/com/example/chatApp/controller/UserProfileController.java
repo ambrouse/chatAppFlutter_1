@@ -2,10 +2,10 @@ package com.example.chatApp.controller;
 
 
 import com.example.chatApp.api_setting.ApiRespone;
+import com.example.chatApp.model.request.ApplyRequestFriendRequest;
+import com.example.chatApp.model.request.UpdateBlogRequest;
 import com.example.chatApp.model.request.UpdateUserRequest;
-import com.example.chatApp.model.respone.UpdateUserRespone;
-import com.example.chatApp.model.respone.UserDetailProfileRespone;
-import com.example.chatApp.model.respone.UserProfileMyBlogRespone;
+import com.example.chatApp.model.respone.*;
 import com.example.chatApp.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +35,38 @@ public class UserProfileController {
 
         return userProfileService.getMyBlog(idUser_);
     }
+
+
+    @RequestMapping("/my_blog_detail/{id_blog}")
+    public ApiRespone<UserProfileMyBlogDetailRespone> getMyBlogDetail(@PathVariable(name = "id_blog") String idBlog_){
+
+        return userProfileService.getMyBlogDetail(idBlog_);
+    }
+
+    @PutMapping("/my_blog_detail")
+    public ApiRespone<UpdateBlogRespone> updateMyBlog(@RequestBody UpdateBlogRequest updateBlogRequest){
+
+        return userProfileService.updateBlog(updateBlogRequest);
+    }
+
+    @DeleteMapping("/my_blog_detail/{id_blog}")
+    public ApiRespone<DeleteMyBlog> updateMyBlog(@PathVariable(name = "id_blog") String idBlog){
+
+        return userProfileService.deleteBlog(idBlog);
+    }
+
+    @RequestMapping("/request_friend/{id_user}")
+    public ApiRespone<List<ListRequestFriendRespone>> getRequestFriend(@PathVariable(name = "id_user") String idUser){
+
+        return userProfileService.getRequestFriend(idUser);
+    }
+
+    @PostMapping("/request_friend")
+    public ApiRespone<ApplyRequestfriendRespone> getRequestFriend(@RequestBody ApplyRequestFriendRequest applyRequestFriendRequest){
+
+        return userProfileService.applyRequestFriend(applyRequestFriendRequest);
+    }
+
+
 
 }

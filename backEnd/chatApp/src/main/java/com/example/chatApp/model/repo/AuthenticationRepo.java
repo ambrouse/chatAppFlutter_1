@@ -10,12 +10,12 @@ public interface AuthenticationRepo extends JpaRepository<AuthenticationEntity,S
 
     @Query(value = "select id_ " +
             "from authentication_ " +
-            "where email_ = :email_",nativeQuery = true)
+            "where email_ = :email_ and status_delete_=1",nativeQuery = true)
     Tuple getAUByEmail(@Param("email_") String email_);
 
     @Query(value = "select id_ " +
             "from authentication_ " +
-            "where email_ = :email_ and password_ = :password_",nativeQuery = true)
+            "where email_ = :email_ and password_ = :password_ and status_delete_=1",nativeQuery = true)
     Tuple getAUByEmailPassword(@Param("email_") String email_,
                                @Param("password_") String password_);
 

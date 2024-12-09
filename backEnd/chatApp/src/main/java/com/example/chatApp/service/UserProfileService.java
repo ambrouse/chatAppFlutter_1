@@ -2,13 +2,12 @@ package com.example.chatApp.service;
 
 import com.example.chatApp.api_setting.ApiRespone;
 import com.example.chatApp.err.CustomRuntimeEception;
-import com.example.chatApp.model.entity.AuthenticationEntity;
-import com.example.chatApp.model.entity.UserEntity;
+import com.example.chatApp.model.entity.*;
 import com.example.chatApp.model.repo.*;
+import com.example.chatApp.model.request.ApplyRequestFriendRequest;
+import com.example.chatApp.model.request.UpdateBlogRequest;
 import com.example.chatApp.model.request.UpdateUserRequest;
-import com.example.chatApp.model.respone.UpdateUserRespone;
-import com.example.chatApp.model.respone.UserDetailProfileRespone;
-import com.example.chatApp.model.respone.UserProfileMyBlogRespone;
+import com.example.chatApp.model.respone.*;
 import jakarta.persistence.Tuple;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +33,8 @@ public class UserProfileService {
     HeartRepo heartRepo;
     @Autowired
     LikeRepo likeRepo;
+    @Autowired
+    LinkUserRepo linkUserRepo;
 
 
     public ApiRespone<UserDetailProfileRespone> getUserDetailProfile(String id_){
@@ -55,7 +57,7 @@ public class UserProfileService {
         Tuple tupleUser_ = userRepo.getUserByIdV2(updateUserRequest.getIdUser_());
 
         if(tupleUser_==null){throw new RuntimeException(CustomRuntimeEception.builder()
-                .desriptionErr_("Không thể cập nhật người dùng bây giờ vui lòng quay lại sau.")
+                .desriptionErr_("Không thể cập nhật người dùng bây giờ vui lòng quay lại sau...")
                 .build());}
 
         UserEntity userEntity = UserEntity.builder()
@@ -110,6 +112,135 @@ public class UserProfileService {
                 .desription_("Request ok")
                 .result_(userProfileMyBlogRespone)
                 .build();
+    }
+
+    public ApiRespone<UserProfileMyBlogDetailRespone> getMyBlogDetail(String idMyBlog_){
+        try {
+            Tuple tupleMyBlogDetail_ = blogRepo.getMyBlogDetail(idMyBlog_);
+            return ApiRespone.<UserProfileMyBlogDetailRespone>builder()
+                    .respone_(200)
+                    .desription_("Request ok")
+                    .result_(UserProfileMyBlogDetailRespone.builder()
+                            .id_(tupleMyBlogDetail_.get("id_").toString())
+                            .title_(tupleMyBlogDetail_.get("title_").toString())
+                            .content_(tupleMyBlogDetail_.get("content_").toString())
+                            .build())
+                    .build();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(CustomRuntimeEception.builder()
+                    .desriptionErr_("lỗi hệ thống vui lòng quay lại sau")
+                    .build());
+        }
+    }
+
+    public ApiRespone<UpdateBlogRespone> updateBlog(UpdateBlogRequest updateBlogRequest){
+
+        try {
+            BlogEntity blogEntity = blogRepo.findById(updateBlogRequest.getIdBlog_()).get();
+
+            blogEntity.setTitle_(updateBlogRequest.getTitle_());
+            blogEntity.setContent_(updateBlogRequest.getContent_());
+            blogRepo.save(blogEntity);
+            return ApiRespone.<UpdateBlogRespone>builder()
+                    .respone_(200)
+                    .desription_("Request ok")
+                    .result_(UpdateBlogRespone.builder()
+                            .checkUpdate_(true)
+                            .desription_("Cập nhật bài viết thành công.")
+                            .build())
+                    .build();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(CustomRuntimeEception.builder()
+                    .desriptionErr_("Lỗi hệ thống vui lòng quay lại sau.")
+                    .build());
+        }
+    }
+
+
+    public ApiRespone<DeleteMyBlog> deleteBlog(String idBlog_){
+
+        try {
+            BlogEntity blogEntity = blogRepo.findById(idBlog_).get();
+
+            blogEntity.setStatusDelete_(0);
+            blogRepo.save(blogEntity);
+            return ApiRespone.<DeleteMyBlog>builder()
+                    .respone_(200)
+                    .desription_("Request ok")
+                    .result_(DeleteMyBlog.builder()
+                            .checkDelete_(true)
+                            .desription_("Xóa bài viết thành công.")
+                            .build())
+                    .build();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(CustomRuntimeEception.builder()
+                    .desriptionErr_("Lỗi hệ thống vui lòng quay lại sau.")
+                    .build());
+        }
+    }
+
+//    public ApiRespone<List<ListFriendSearchRespone>> getSearchFriend(String name_){
+//        List<Tuple> tuplesUserSearch_ = userRepo.getUserByName(name_);
+//
+//        if(tuplesUserSearch_==null){throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("Không tìm thấy người dùng.").build());}
+//
+//        List<ListFriendSearchRespone> friendSearchRespones = tuplesUserSearch_.stream().map(t->new ListFriendSearchRespone(
+//                t.get("id_",String.class),
+//                t.get("name_",String.class)
+//        )).collect(Collectors.toList());
+//
+//        return ApiRespone.<List<ListFriendSearchRespone>>builder()
+//                .respone_(200)
+//                .desription_("Request ok ")
+//                .result_(friendSearchRespones)
+//                .build();
+//
+//    }
+
+    public ApiRespone<List<ListRequestFriendRespone>> getRequestFriend(String idUser_){
+        List<Tuple> tuplesFriendRequest_ = friendrequestRepo.getRequestUserByIdUser(idUser_);
+
+        if(tuplesFriendRequest_==null){throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("Không có lời mời kết bạn nào.").build());}
+
+        List<ListRequestFriendRespone> requestFriendRespones = tuplesFriendRequest_.stream().map(t-> new ListRequestFriendRespone(
+                t.get("id_",String.class),
+                t.get("name_",String.class)
+        )).collect(Collectors.toList());
+
+        return ApiRespone.<List<ListRequestFriendRespone>>builder()
+                .respone_(200)
+                .desription_("Request ok")
+                .result_(requestFriendRespones)
+                .build();
+    }
+
+    public ApiRespone<ApplyRequestfriendRespone> applyRequestFriend(ApplyRequestFriendRequest applyRequestFriendRequest){
+        try {
+            System.out.println(applyRequestFriendRequest);
+            FriendRequestEntity friendRequestEntity = friendrequestRepo.findById(applyRequestFriendRequest.getIdRequestFriend_()).get();
+            LinkUserEntity linkUserEntity = LinkUserEntity.builder()
+                    .idUser_(friendRequestEntity.getIdUser_())
+                    .idUserFriend_(friendRequestEntity.getIdUserFriend_())
+                    .statusDelete_(1)
+                    .build();
+            linkUserRepo.save(linkUserEntity);
+            friendRequestEntity.setStatusDelete_(0);
+            friendrequestRepo.save(friendRequestEntity);
+
+            return ApiRespone.<ApplyRequestfriendRespone>builder()
+                    .respone_(200)
+                    .desription_("Request ok")
+                    .result_(ApplyRequestfriendRespone.builder()
+                            .checkApply_(true)
+                            .desription_("Đã chấp nhận lời mời kết bạn.")
+                            .build())
+                    .build();
+
+        } catch (RuntimeException e) {
+            throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("Lỗi hệ thống vui lòng quay lại sau.").build());
+        }
+
+
     }
 
 }

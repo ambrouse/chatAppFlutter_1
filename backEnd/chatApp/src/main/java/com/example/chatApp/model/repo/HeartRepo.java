@@ -11,6 +11,6 @@ import java.util.List;
 public interface HeartRepo extends JpaRepository<HeartEntity,String> {
     @Query(value = "select COUNT(id_) " +
             "from heart_ " +
-            "where id_blog_ = :idBlog_",nativeQuery = true)
+            "where id_blog_ = :idBlog_ and status_delete_=1",nativeQuery = true)
     int countHeartMyBlog(@Param("idBlog_") String idBlog);
 }

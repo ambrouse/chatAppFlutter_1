@@ -12,7 +12,7 @@ public interface LinkUserRepo extends JpaRepository<LinkUserEntity,String> {
 
     @Query(value = "select l.id_ as idLinkUser_, u.name_ as nameFriend_ " +
             "from link_user_ l, user_ u " +
-            "where l.id_user_friend_ = u.id_ and l.id_user_ = :idUser_ and u.name_ like %:nameUser_%",nativeQuery = true)
+            "where l.id_user_friend_ = u.id_ and l.id_user_ = :idUser_ and u.name_ like %:nameUser_% and l.status_delete_=1 and u.status_delete_=1",nativeQuery = true)
     List<Tuple> getLinkUserByIdUser(@Param("idUser_") String idUser_,
                                     @Param("nameUser_") String nameUser_);
 
