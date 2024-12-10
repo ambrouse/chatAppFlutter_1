@@ -24,6 +24,7 @@ public interface UserRepo extends JpaRepository<UserEntity,String> {
 
     @Query(value = "select id_ as id_, name_ as name_ " +
             "from user_ " +
-            "where name_ like %:name_%",nativeQuery = true)
-    List<Tuple> getUserByName(@Param("name_") String name_);
+            "where name_ like %:name_% and status_delete_ = 1 and id_ != :idUser_",nativeQuery = true)
+    List<Tuple> getUserByName(@Param("name_") String name_,
+                              @Param("idUser_") String idUser_);
 }

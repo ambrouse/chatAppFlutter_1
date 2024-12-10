@@ -27,7 +27,7 @@ public class SecuritySetting {
     private final String[] link_not_securiry = {"/chat_app/api/v1/login","/chat_app/api/v1/sigup","/chat_app/api/v1/friends","chat_app/api/v1/user/{id_user}"
             ,"chat_app/api/v1/user","/chat_app/api/v1/my_blog/{id_user}","/chat_app/api/v1/my_blog_detail/{id_blog}","/chat_app/api/v1/my_blog_detail","chat_app/api/v1/request_friend/{id_user}",
             "/chat_app/api/v1/request_friend","/chat_app/api/v1/chat/{id_link_user}","/chat_app/api/v1/chat","/chat_app/api/v1/blog/{id_user}","/chat_app/api/v1/blog",
-            "/chat_app/api/v1/blog_like","/chat_app /api/v1/blog_heart","/chat_app/api/v1/test"};
+            "/chat_app/api/v1/blog_like","/chat_app/api/v1/blog_like/{id_like}","/chat_app/api/v1/blog_heart","/chat_app/api/v1/blog_heart/{id_heart}","/chat_app/api/v1/send_request_friend"};
 
     @Value("${jwt.create_token_key}")
     private String sereckey;
