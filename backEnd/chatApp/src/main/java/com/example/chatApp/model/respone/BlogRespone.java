@@ -21,4 +21,7 @@ public class BlogRespone {
     boolean checkHeart_;
     String idLike_;
     String idHeart_;
+    String nameUser_;
+    String linkImgBlog_;
+    String linkImgUser_;
 }

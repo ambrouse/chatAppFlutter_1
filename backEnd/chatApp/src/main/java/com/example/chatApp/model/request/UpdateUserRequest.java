@@ -14,4 +14,5 @@ public class UpdateUserRequest {
     String email_;
     String password_;
     int age_;
+    String linkImg_;
 }

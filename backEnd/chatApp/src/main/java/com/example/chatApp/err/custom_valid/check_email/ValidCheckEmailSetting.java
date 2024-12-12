@@ -11,7 +11,7 @@ public class ValidCheckEmailSetting implements ConstraintValidator<ValidCheckEma
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        if(s==null){return true;}
+        if(s==null || s==""){return true;}
 
         if(s.indexOf("@gmail.com",s.length()-10)!=-1){
             return true;

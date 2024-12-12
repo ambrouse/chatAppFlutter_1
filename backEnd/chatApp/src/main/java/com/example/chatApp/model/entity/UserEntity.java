@@ -22,6 +22,8 @@ public class UserEntity {
     String idAuthentication_;
     @Column(name = "name_")
     String name_;
+    @Column(name = "link_img_")
+    String linkImg_;
     @Column(name = "age_")
     int age_;
     @Column(name = "status_delete_")

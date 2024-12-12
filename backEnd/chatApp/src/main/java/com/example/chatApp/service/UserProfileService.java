@@ -49,12 +49,19 @@ public class UserProfileService {
                         .email_(tupleUser_.get(1).toString())
                         .password_(tupleUser_.get(2).toString())
                         .age_(tupleUser_.get(3).toString())
+                        .linkImg_(tupleUser_.get(4).toString())
                         .build())
                 .build();
     }
 
     public ApiRespone<UpdateUserRespone> updateUser(UpdateUserRequest updateUserRequest){
         Tuple tupleUser_ = userRepo.getUserByIdV2(updateUserRequest.getIdUser_());
+        if(authenticationRepo.getAUByEmail(updateUserRequest.getEmail_())!=null){
+            throw new RuntimeException(CustomRuntimeEception.builder()
+                    .desriptionErr_("Email đã được đăng kí, vui lòng dùng email khác hoặc đăng nhập với email này.")
+                    .build());
+        };
+
 
         if(tupleUser_==null){throw new RuntimeException(CustomRuntimeEception.builder()
                 .desriptionErr_("Không thể cập nhật người dùng bây giờ vui lòng quay lại sau...")
@@ -66,6 +73,7 @@ public class UserProfileService {
                 .name_(updateUserRequest.getName_())
                 .age_(updateUserRequest.getAge_())
                 .idAuthentication_(tupleUser_.get(1).toString())
+                .linkImg_(updateUserRequest.getLinkImg_())
                 .build();
         AuthenticationEntity authenticationEntity = AuthenticationEntity.builder()
                 .id_(tupleUser_.get(1).toString())
@@ -124,6 +132,7 @@ public class UserProfileService {
                             .id_(tupleMyBlogDetail_.get("id_").toString())
                             .title_(tupleMyBlogDetail_.get("title_").toString())
                             .content_(tupleMyBlogDetail_.get("content_").toString())
+                            .linkImg_(tupleMyBlogDetail_.get("linkImg_").toString())
                             .build())
                     .build();
         } catch (RuntimeException e) {
@@ -140,6 +149,7 @@ public class UserProfileService {
 
             blogEntity.setTitle_(updateBlogRequest.getTitle_());
             blogEntity.setContent_(updateBlogRequest.getContent_());
+            blogEntity.setLinkImg_(updateBlogRequest.getLinkImg_());
             blogRepo.save(blogEntity);
             return ApiRespone.<UpdateBlogRespone>builder()
                     .respone_(200)
@@ -179,24 +189,6 @@ public class UserProfileService {
         }
     }
 
-//    public ApiRespone<List<ListFriendSearchRespone>> getSearchFriend(String name_){
-//        List<Tuple> tuplesUserSearch_ = userRepo.getUserByName(name_);
-//
-//        if(tuplesUserSearch_==null){throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("Không tìm thấy người dùng.").build());}
-//
-//        List<ListFriendSearchRespone> friendSearchRespones = tuplesUserSearch_.stream().map(t->new ListFriendSearchRespone(
-//                t.get("id_",String.class),
-//                t.get("name_",String.class)
-//        )).collect(Collectors.toList());
-//
-//        return ApiRespone.<List<ListFriendSearchRespone>>builder()
-//                .respone_(200)
-//                .desription_("Request ok ")
-//                .result_(friendSearchRespones)
-//                .build();
-//
-//    }
-
     public ApiRespone<List<ListRequestFriendRespone>> getRequestFriend(String idUser_){
         List<Tuple> tuplesFriendRequest_ = friendrequestRepo.getRequestUserByIdUser(idUser_);
 
@@ -204,7 +196,8 @@ public class UserProfileService {
 
         List<ListRequestFriendRespone> requestFriendRespones = tuplesFriendRequest_.stream().map(t-> new ListRequestFriendRespone(
                 t.get("id_",String.class),
-                t.get("name_",String.class)
+                t.get("name_",String.class),
+                t.get("linkImg_",String.class)
         )).collect(Collectors.toList());
 
         return ApiRespone.<List<ListRequestFriendRespone>>builder()

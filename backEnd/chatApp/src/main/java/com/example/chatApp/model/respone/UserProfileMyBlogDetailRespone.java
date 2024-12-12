@@ -13,4 +13,5 @@ public class UserProfileMyBlogDetailRespone {
     String id_;
     String title_;
     String content_;
+    String linkImg_;
 }

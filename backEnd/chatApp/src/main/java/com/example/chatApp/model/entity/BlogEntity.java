@@ -24,6 +24,8 @@ public class BlogEntity {
     String title_;
     @Column(name = "content_")
     String content_;
+    @Column(name = "link_img_")
+    String linkImg_;
     @Column(name = "status_")
     String status_;
     @Column(name = "status_delete_")

@@ -31,7 +31,8 @@ public class RequestFriendService {
 
         List<UserRespone> userRespones = tuplesUser_.stream().map(t-> new UserRespone(
                 t.get("id_",String.class),
-                t.get("id_",String.class)
+                t.get("id_",String.class),
+                t.get("linkImg_",String.class)
         )).collect(Collectors.toList());
 
         return ApiRespone.<List<UserRespone>>builder()

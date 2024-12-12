@@ -11,4 +11,5 @@ import lombok.experimental.FieldDefaults;
 public class ListFriendRespone {
     String idLinkUser_;
     String nameFriend_;
+    String linkImgFriend_;
 }

@@ -6,6 +6,7 @@ import com.example.chatApp.model.request.LoginRequest;
 import com.example.chatApp.model.request.SigupRequest;
 import com.example.chatApp.model.respone.LoginSigupRespone;
 import com.example.chatApp.service.LoginSigupService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,13 +19,13 @@ public class LoginSigupController {
 
 
     @GetMapping("/login")
-    public ApiRespone<LoginSigupRespone> login(@RequestBody LoginRequest loginRequest){
+    public ApiRespone<LoginSigupRespone> login(@RequestBody @Valid LoginRequest loginRequest){
 
         return loginSigupService.login(loginRequest);
     }
 
     @PostMapping("/sigup")
-    public ApiRespone<LoginSigupRespone> sgup(@RequestBody SigupRequest sigupRequest){
+    public ApiRespone<LoginSigupRespone> sgup(@RequestBody @Valid SigupRequest sigupRequest){
 
         return loginSigupService.sigup(sigupRequest);
     }

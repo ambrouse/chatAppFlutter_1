@@ -12,4 +12,5 @@ public class UpdateBlogRequest {
     String idBlog_;
     String title_;
     String content_;
+    String linkImg_;
 }

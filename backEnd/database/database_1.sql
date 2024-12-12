@@ -18,6 +18,7 @@ CREATE TABLE [user_] (
   [id_authentication_] varchar(60),
   [name_] nvarchar(255),
   [age_] int,
+  link_img_ nvarchar(max),
   [status_delete_] tinyint,
   [day_delete_] datetime
 )
@@ -39,6 +40,7 @@ CREATE TABLE [blog_] (
   [content_] nvarchar(max),
   [status_] int,
   day_blog_ datetime,
+  link_img_ nvarchar(max),
   [status_delete_] tinyint,
   [day_delete_] datetime
 )
@@ -139,12 +141,12 @@ insert into authentication_ (id_,email_,password_,status_delete_) values
 ('au_5','testemail5@gmail.com','testpassword5',1)
 
 go
-insert into user_ (id_,name_,age_,id_authentication_,status_delete_) values 
-('user_1','test name 1',19,'au_1',1),
-('user_2','test name 2',20,'au_2',1),
-('user_3','test name 3',21,'au_3',1),
-('user_4','test name 4',22,'au_4',1),
-('user_5','test name 5',23,'au_5',1)
+insert into user_ (id_,name_,age_,id_authentication_,status_delete_,link_img_) values 
+('user_1','test name 1',19,'au_1',1,'link test'),
+('user_2','test name 2',20,'au_2',1,'link test'),
+('user_3','test name 3',21,'au_3',1,'link test'),
+('user_4','test name 4',22,'au_4',1,'link test'),
+('user_5','test name 5',23,'au_5',1,'link test')
 
 go
 insert into link_user_ (id_,id_user_,id_user_friend_,status_delete_) values
@@ -155,12 +157,12 @@ insert into link_user_ (id_,id_user_,id_user_friend_,status_delete_) values
 ('link_user_5','user_5','user_1',1)
 
 go
-insert into blog_ (id_,id_user_,title_,content_,status_,status_delete_) values
-('blog_1','user_1','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1),
-('blog_2','user_2','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1),
-('blog_3','user_3','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1),
-('blog_4','user_4','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1),
-('blog_5','user_5','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1)
+insert into blog_ (id_,id_user_,title_,content_,status_,status_delete_,link_img_) values
+('blog_1','user_1','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1,'link test'),
+('blog_2','user_2','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1,'link test'),
+('blog_3','user_3','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1,'link test'),
+('blog_4','user_4','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1,'link test'),
+('blog_5','user_5','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1,'link test')
 
 go
 insert into heart_(id_,id_user_,id_blog_,status_delete_) values 

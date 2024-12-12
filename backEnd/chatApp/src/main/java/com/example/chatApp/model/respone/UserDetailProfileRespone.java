@@ -13,4 +13,5 @@ public class UserDetailProfileRespone {
     String email_;
     String password_;
     String age_;
+    String linkImg_;
 }

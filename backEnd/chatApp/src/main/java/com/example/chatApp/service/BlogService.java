@@ -49,7 +49,10 @@ public class BlogService {
                     false,
                     false,
                     "",
-                    ""
+                    "",
+                    t.get("name_",String.class),
+                    t.get("linkImgBlog_",String.class),
+                    t.get("linkImgUser_",String.class)
             )).collect(Collectors.toList());
             for(BlogRespone i : blogRespones){
                 i.setLike_(likeRepo.countLikeByFriendBlog(i.getId_()));
