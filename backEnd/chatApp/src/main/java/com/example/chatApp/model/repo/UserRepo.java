@@ -21,6 +21,11 @@ public interface UserRepo extends JpaRepository<UserEntity,String> {
             "where u.id_ = :idUser_ and u.id_authentication_ = a.id_ and u.status_delete_=1 and a.status_delete_=1", nativeQuery = true)
     Tuple getUserByIdV2(@Param("idUser_") String idUser_);
 
+    @Query(value = "select u.id_ " +
+            "from user_ u, authentication_ a " +
+            "where a.id_ = :idAu_ and u.id_authentication_ = a.id_ and u.status_delete_=1 and a.status_delete_=1", nativeQuery = true)
+    Tuple getUserByIdAu(@Param("idAu_") String idAu_);
+
 
     @Query(value = "select id_ as id_, name_ as name_, link_img_ as linkImg_ " +
             "from user_ " +

@@ -56,11 +56,11 @@ public class UserProfileService {
 
     public ApiRespone<UpdateUserRespone> updateUser(UpdateUserRequest updateUserRequest){
         Tuple tupleUser_ = userRepo.getUserByIdV2(updateUserRequest.getIdUser_());
-        if(authenticationRepo.getAUByEmail(updateUserRequest.getEmail_())!=null){
-            throw new RuntimeException(CustomRuntimeEception.builder()
-                    .desriptionErr_("Email đã được đăng kí, vui lòng dùng email khác hoặc đăng nhập với email này.")
-                    .build());
-        };
+//        if(authenticationRepo.getAUByEmail(updateUserRequest.getEmail_())!=null){
+//            throw new RuntimeException(CustomRuntimeEception.builder()
+//                    .desriptionErr_("Email đã được đăng kí, vui lòng dùng email khác hoặc đăng nhập với email này.")
+//                    .build());
+//        };
 
 
         if(tupleUser_==null){throw new RuntimeException(CustomRuntimeEception.builder()
@@ -103,6 +103,10 @@ public class UserProfileService {
         List<Tuple> tuplesMyBlog_ =  blogRepo.getMyBlog(idUser_);
 
         List<UserProfileMyBlogRespone> userProfileMyBlogRespone = new ArrayList<>();
+
+        if(tuplesMyBlog_==null){throw new RuntimeException(CustomRuntimeEception.builder()
+                .desriptionErr_("Chưa có blog nào.")
+                .build());}
 
         for(Tuple i : tuplesMyBlog_){
             UserProfileMyBlogRespone userProfileMyBlogRespone1 = UserProfileMyBlogRespone.builder()
@@ -192,7 +196,8 @@ public class UserProfileService {
     public ApiRespone<List<ListRequestFriendRespone>> getRequestFriend(String idUser_){
         List<Tuple> tuplesFriendRequest_ = friendrequestRepo.getRequestUserByIdUser(idUser_);
 
-        if(tuplesFriendRequest_==null){throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("Không có lời mời kết bạn nào.").build());}
+
+        if(tuplesFriendRequest_.isEmpty()){throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("Không có lời mời kết bạn nào.").build());}
 
         List<ListRequestFriendRespone> requestFriendRespones = tuplesFriendRequest_.stream().map(t-> new ListRequestFriendRespone(
                 t.get("id_",String.class),
@@ -226,6 +231,29 @@ public class UserProfileService {
                     .result_(ApplyRequestfriendRespone.builder()
                             .checkApply_(true)
                             .desription_("Đã chấp nhận lời mời kết bạn.")
+                            .build())
+                    .build();
+
+        } catch (RuntimeException e) {
+            throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("Lỗi hệ thống vui lòng quay lại sau.").build());
+        }
+
+
+    }
+
+    public ApiRespone<ApplyRequestfriendRespone> deleteRequestFriend(String idRequestFriend_){
+        try {
+
+            FriendRequestEntity friendRequestEntity = friendrequestRepo.findById(idRequestFriend_).get();
+            friendRequestEntity.setStatusDelete_(0);
+            friendrequestRepo.save(friendRequestEntity);
+
+            return ApiRespone.<ApplyRequestfriendRespone>builder()
+                    .respone_(200)
+                    .desription_("Request ok")
+                    .result_(ApplyRequestfriendRespone.builder()
+                            .checkApply_(true)
+                            .desription_("Đã xóa lời mời kết bạn.")
                             .build())
                     .build();
 

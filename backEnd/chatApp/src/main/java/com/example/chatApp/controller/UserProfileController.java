@@ -62,9 +62,15 @@ public class UserProfileController {
     }
 
     @PostMapping("/request_friend")
-    public ApiRespone<ApplyRequestfriendRespone> getRequestFriend(@RequestBody ApplyRequestFriendRequest applyRequestFriendRequest){
+    public ApiRespone<ApplyRequestfriendRespone> applyRequestFriend(@RequestBody ApplyRequestFriendRequest applyRequestFriendRequest){
 
         return userProfileService.applyRequestFriend(applyRequestFriendRequest);
+    }
+
+    @DeleteMapping("/request_friend/{id_request_friend}")
+    public ApiRespone<ApplyRequestfriendRespone> deleteRequestFriend(@PathVariable(name = "id_request_friend") String idRequestFriend){
+
+        return userProfileService.deleteRequestFriend(idRequestFriend);
     }
 
 

@@ -38,6 +38,8 @@ dependencies:
   dio: ^5.7.0
   image_field: ^0.0.10
   shared_preferences: ^2.3.3
+  image_picker: ^1.1.2
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:

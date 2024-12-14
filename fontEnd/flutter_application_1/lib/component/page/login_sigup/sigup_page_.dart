@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/component/custom_state/custom_button_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_text_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_text_field_1_.dart';
+import 'package:flutter_application_1/function/function_login_sigup_.dart';
 import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,30 +15,6 @@ class Sigup_page_ extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return Sigup_page_setting_();
-  }
-}
-
-Future<dynamic> func_sigup_request_(name_, email_, password_, age_) async {
-  final dio = Dio();
-  try {
-    Response response = await dio.post(
-        "http://10.0.2.2:9090/chat_app/api/v1/sigup",
-        data: {
-          "email_": email_,
-          "password_": password_,
-          "name_": name_,
-          "age_": 10
-        },
-        options: Options(
-            contentType: Headers.jsonContentType,
-            headers: {"Authorization": ""}));
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString(
-        "jwtToken_", response.data["result_"]["token_"]);
-    sharedPreferences.setString("idUser_", response.data["result_"]["idUser_"]);
-    return [true, response];
-  } on DioException catch (e) {
-    return [false, e?.response];
   }
 }
 
@@ -67,7 +44,7 @@ class Sigup_page_setting_ extends State<Sigup_page_> {
               margin: EdgeInsets.only(top: 50),
               width: (width_ / 1.3),
               height: 30,
-              child: Custom_text_field(textEditingControllerName_, "Nhập Tên"),
+              child: Custom_text_field(textEditingControllerName_, "Nhập Tên",1),
             ),
           ),
           Center(
@@ -76,7 +53,7 @@ class Sigup_page_setting_ extends State<Sigup_page_> {
               width: (width_ / 1.3),
               height: 30,
               child:
-                  Custom_text_field(textEditingControllerEmail_, "Nhập Email"),
+                  Custom_text_field(textEditingControllerEmail_, "Nhập Email",1),
             ),
           ),
           Center(
@@ -85,7 +62,7 @@ class Sigup_page_setting_ extends State<Sigup_page_> {
               width: (width_ / 1.3),
               height: 30,
               child: Custom_text_field(
-                  textEditingControllerPassword_, "Nhập Mật khẩu"),
+                  textEditingControllerPassword_, "Nhập Mật khẩu",1),
             ),
           ),
           Center(
@@ -94,7 +71,7 @@ class Sigup_page_setting_ extends State<Sigup_page_> {
               width: (width_ / 1.3),
               height: 30,
               child: Custom_text_field(
-                  textEditingControllerAge_, "Nhập Tuổi"),
+                  textEditingControllerAge_, "Nhập Tuổi",1),
             ),
           ),
           Center(
@@ -124,13 +101,12 @@ class Sigup_page_setting_ extends State<Sigup_page_> {
                   Container(
                     child: InkWell(
                       onTap: () {
-                        func_sigup_request_(
+                        Func_sigup_request_(
                                 textEditingControllerName_.text,
                                 textEditingControllerEmail_.text,
                                 textEditingControllerPassword_.text,
                                 textEditingControllerAge_.text)
                             .then((data) {
-                          print(data);
                           setState(() {
                             if (data[0]) {
                               errNofitication_ = "";

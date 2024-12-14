@@ -22,7 +22,6 @@ class Custom_buttom_1_Setting_ extends State<Custom_buttom_1_> {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
-        margin: const EdgeInsets.only(top: 20),
         decoration: BoxDecoration(
             color: widget.colorBackgr_,
             borderRadius: const BorderRadius.all(Radius.circular(10)),

@@ -45,13 +45,15 @@ public class LoginSigupService {
 
         if(tupleIdUserByEmailPassword_==null){throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("Vui lòng kiểm tra lại mật khẩu.").build());}
 
+        Tuple tupleUserId_ = userRepo.getUserByIdAu(tupleIdUserByEmailPassword_.get(0).toString());
+
         return ApiRespone.<LoginSigupRespone>builder()
                 .respone_(200)
                 .desription_("Request ok")
                 .result_(LoginSigupRespone.builder()
                         .token_(create_token(tupleIdUserByEmailPassword_.get(0).toString()))
                         .check_(true)
-                        .idUser_(tupleIdUserByEmailPassword_.get(0).toString())
+                        .idUser_(tupleUserId_.get(0).toString())
                         .build())
                 .build();
 
@@ -79,11 +81,13 @@ public class LoginSigupService {
                     .build();
             userRepo.save(userEntity);
 
+        Tuple tupleUserId_ = userRepo.getUserByIdAu(tupleIdUserByEmail_.get(0).toString());
+
             return ApiRespone.<LoginSigupRespone>builder()
                     .respone_(200)
                     .desription_("Request ok")
                     .result_(LoginSigupRespone.builder()
-                            .idUser_(tupleIdUserByEmail_.get(0).toString())
+                            .idUser_(tupleUserId_.get(0).toString())
                             .check_(true)
                             .token_(create_token(tupleIdUserByEmail_.get(0).toString()))
                             .build())

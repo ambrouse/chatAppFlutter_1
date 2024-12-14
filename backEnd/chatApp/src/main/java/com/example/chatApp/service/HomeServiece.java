@@ -2,6 +2,7 @@ package com.example.chatApp.service;
 
 
 import com.example.chatApp.api_setting.ApiRespone;
+import com.example.chatApp.err.CustomRuntimeEception;
 import com.example.chatApp.model.repo.LinkUserRepo;
 import com.example.chatApp.model.respone.ListFriendRespone;
 import jakarta.persistence.Tuple;
@@ -21,6 +22,10 @@ public class HomeServiece {
 
     public ApiRespone<List<ListFriendRespone>> getListFriend(String idUser_,String name_){
         List<Tuple> tuplesUserFriend_ = linkUserRepo.getLinkUserByIdUser(idUser_,name_);
+
+        if(tuplesUserFriend_.isEmpty()){
+            throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("no friend").build());
+        }
 
         List<ListFriendRespone> listFriendRespones = tuplesUserFriend_.stream().map(t->new ListFriendRespone(
                 t.get("idLinkUser_",String.class),
