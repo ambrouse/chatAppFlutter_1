@@ -37,7 +37,7 @@ class User_profile_edit_request_friend_setting_
     final height_ = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: colorBackGround_1_,
-      bottomNavigationBar: Custom_navbar_1_(3),
+      bottomNavigationBar: Custom_navbar_1_(2),
       body: SingleChildScrollView(
         child: Container(
           width: width_,

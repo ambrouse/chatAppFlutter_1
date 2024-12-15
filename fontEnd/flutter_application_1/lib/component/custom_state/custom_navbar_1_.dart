@@ -31,11 +31,6 @@ class Custom_navbar_1_setting_ extends State<Custom_navbar_1_> {
           label: '',
         ),
         NavigationDestination(
-          selectedIcon: Icon(Icons.chat),
-          icon: Icon(Icons.chat),
-          label: '',
-        ),
-        NavigationDestination(
           selectedIcon: Icon(Icons.home),
           icon: Icon(Icons.home_outlined),
           label: '',

@@ -222,6 +222,12 @@ public class UserProfileService {
                     .statusDelete_(1)
                     .build();
             linkUserRepo.save(linkUserEntity);
+            LinkUserEntity linkUserEntity_ = LinkUserEntity.builder()
+                    .idUser_(friendRequestEntity.getIdUserFriend_())
+                    .idUserFriend_(friendRequestEntity.getIdUser_())
+                    .statusDelete_(1)
+                    .build();
+            linkUserRepo.save(linkUserEntity_);
             friendRequestEntity.setStatusDelete_(0);
             friendrequestRepo.save(friendRequestEntity);
 

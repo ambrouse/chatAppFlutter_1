@@ -40,7 +40,7 @@ class User_profile_edit_blog_page_setting_
 
     return Scaffold(
         backgroundColor: colorBackGround_1_,
-        bottomNavigationBar: Custom_navbar_1_(3),
+        bottomNavigationBar: Custom_navbar_1_(2),
         body: Container(
           width: width_,
           height: height_,

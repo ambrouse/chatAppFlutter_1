@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/component/page/chat/chat_page_.dart';
 import 'package:flutter_application_1/component/page/home/home_page_.dart';
 import 'package:flutter_application_1/component/page/login_sigup/login_page_.dart';
 import 'package:flutter_application_1/component/page/login_sigup/sigup_page_.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           "/user/user_profile_edit_blog": (context) => User_profile_edit_blog_page_(),
           "/user/user_profile_edit_blog_detail_": (context) => User_profile_edit_blog_detail_page_(),
           "/user/user_profile_edit_request_friend_": (context) => User_profile_edit_request_friend_(),
+          "/user/chat": (context) => Chat_page_(),
         },
       ),
     );

@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ListFriendRespone {
-    String idLinkUser_;
+    String idUserfriend_;
     String nameFriend_;
     String linkImgFriend_;
 }

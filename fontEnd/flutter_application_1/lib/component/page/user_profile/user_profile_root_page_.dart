@@ -43,7 +43,7 @@ class User_profile_root_page_setting_ extends State<User_profile_root_page_> {
     final height_ = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      bottomNavigationBar: Custom_navbar_1_(3),
+      bottomNavigationBar: Custom_navbar_1_(2),
       backgroundColor: colorBackGround_1_,
       body: SingleChildScrollView(
         child: Stack(

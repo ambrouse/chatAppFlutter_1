@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SendChatRequest {
-    String idLinkUser_;
+    String idUser_;
+    String iduserFriend_;
     String content_;
 }

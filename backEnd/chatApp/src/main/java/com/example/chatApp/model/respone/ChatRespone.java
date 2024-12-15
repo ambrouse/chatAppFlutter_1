@@ -12,4 +12,5 @@ import lombok.experimental.FieldDefaults;
 public class ChatRespone {
     String id_;
     String mess_;
+    String idSend_;
 }

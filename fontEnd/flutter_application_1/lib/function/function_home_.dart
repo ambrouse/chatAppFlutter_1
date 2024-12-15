@@ -6,14 +6,15 @@ Future<dynamic> functionGetFriend(String nameFriend_) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   String idUser_ = sharedPreferences.getString("idUser_").toString();
   String token_ = sharedPreferences.getString("jwtToken_").toString();
-  print("http://10.0.2.2:9090/chat_app/api/v1/friends?id_user=" +
-      idUser_ +
-      "&name=");
+  // print("http://10.0.2.2:9090/chat_app/api/v1/friends?id_user=" +
+  //     idUser_ +
+  //     "&name="+nameFriend_);
   try {
     Response response = await dio.get(
         "http://10.0.2.2:9090/chat_app/api/v1/friends?id_user=" +
             idUser_ +
-            "&name=",
+            "&name=" +
+            nameFriend_,
         data: {},
         options: Options(
             contentType: Headers.jsonContentType,

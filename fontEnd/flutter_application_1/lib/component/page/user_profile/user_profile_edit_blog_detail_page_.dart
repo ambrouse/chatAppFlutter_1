@@ -52,7 +52,7 @@ class User_profile_edit_blog_detail_page_setting_
     }
     return Scaffold(
       backgroundColor: colorBackGround_1_,
-      bottomNavigationBar: Custom_navbar_1_(3),
+      bottomNavigationBar: Custom_navbar_1_(2),
       body: SingleChildScrollView(
         child: myBlogDetail_ == null
             ? Container(

@@ -5,6 +5,7 @@ import 'package:flutter_application_1/component/custom_state/custom_button_1_.da
 import 'package:flutter_application_1/component/custom_state/custom_navbar_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_text_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_text_field_1_.dart';
+import 'package:flutter_application_1/function/function_chat_.dart';
 import 'package:flutter_application_1/function/function_home_.dart';
 import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 
@@ -19,10 +20,15 @@ class Home_page_setting_ extends State<Home_page_> {
   TextEditingController textEditingControllerNameFriend_ =
       TextEditingController();
   var friend_;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    functionTest().then((data) {
+      print(data);
+    });
     functionGetFriend("").then((data) {
       setState(() {
         friend_ = data;
@@ -37,7 +43,7 @@ class Home_page_setting_ extends State<Home_page_> {
 
     return Scaffold(
       backgroundColor: colorBackGround_1_,
-      bottomNavigationBar: Custom_navbar_1_(2),
+      bottomNavigationBar: Custom_navbar_1_(1),
       body: SingleChildScrollView(
         child: Container(
           width: width_,
@@ -68,7 +74,15 @@ class Home_page_setting_ extends State<Home_page_> {
                         child: Center(
                           child: Container(
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                functionGetFriend(
+                                        textEditingControllerNameFriend_.text)
+                                    .then((data) {
+                                  setState(() {
+                                    friend_ = data;
+                                  });
+                                });
+                              },
                               child: Custom_buttom_1_("Tìm"),
                             ),
                           ),
@@ -88,8 +102,10 @@ class Home_page_setting_ extends State<Home_page_> {
                           ? Container(
                               margin: EdgeInsets.only(top: 50),
                               alignment: Alignment.center,
-                              child: Custom_text_1_(friend_[1]["result_"],
-                                  colorBackGround_2_, sizeText_3_),
+                              child: Custom_text_1_(
+                                  friend_[1].data["result_"].toString(),
+                                  colorBackGround_2_,
+                                  sizeText_3_),
                             )
                           : Container(
                               margin: EdgeInsets.only(top: 50),
@@ -103,46 +119,59 @@ class Home_page_setting_ extends State<Home_page_> {
                                           mainAxisSpacing: 20),
                                   itemCount: friend_[1].data["result_"].length,
                                   itemBuilder: (context, index) {
-                                    return Container(
-                                        padding: EdgeInsets.only(
-                                            left: 10, right: 10),
-                                        decoration: BoxDecoration(
-                                            color: colorBackGround_2_,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(100000))),
-                                        child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                width: 40,
-                                                height: 40,
-                                                decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: Image.file(File(
-                                                                friend_[1].data[
-                                                                            "result_"]
-                                                                        [index][
-                                                                    "linkImgFriend_"]))
-                                                            .image),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                      Radius.circular(100000),
-                                                    ),
-                                                    border: Border.all(
-                                                        color:
-                                                            colorBackGround_1_,
-                                                        width: 1)),
-                                              ),
-                                              Container(
-                                                child: Custom_text_1_(
-                                                    friend_[1].data["result_"]
-                                                        [index]["nameFriend_"],
-                                                    colorBackGround_1_,
-                                                    sizeText_2_),
-                                              ),
-                                            ]));
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, "/user/chat",
+                                            arguments:
+                                                friend_[1].data["result_"]
+                                                    [index]["idUserfriend_"]);
+                                      },
+                                      child: Container(
+                                          padding: EdgeInsets.only(
+                                              left: 10, right: 10),
+                                          decoration: BoxDecoration(
+                                              color: colorBackGround_2_,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(100000))),
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Container(
+                                                  width: 40,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                          fit: BoxFit.cover,
+                                                          image: Image.file(File(
+                                                                  friend_[1].data[
+                                                                              "result_"]
+                                                                          [
+                                                                          index]
+                                                                      [
+                                                                      "linkImgFriend_"]))
+                                                              .image),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(100000),
+                                                      ),
+                                                      border: Border.all(
+                                                          color:
+                                                              colorBackGround_1_,
+                                                          width: 1)),
+                                                ),
+                                                Container(
+                                                  child: Custom_text_1_(
+                                                      friend_[1].data["result_"]
+                                                              [index]
+                                                          ["nameFriend_"],
+                                                      colorBackGround_1_,
+                                                      sizeText_2_),
+                                                ),
+                                              ])),
+                                    );
                                   }),
                             ))
             ],

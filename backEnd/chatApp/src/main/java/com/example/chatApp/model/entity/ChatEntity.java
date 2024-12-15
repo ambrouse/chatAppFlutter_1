@@ -18,8 +18,10 @@ public class ChatEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_")
     String id_;
-    @Column(name = "id_link_user_")
-    String idLinkUser_;
+    @Column(name = "id_user_send_")
+    String idUserSend_;
+    @Column(name = "id_user_receive_")
+    String idUserReceive_;
     @Column(name = "content_")
     String content_;
     @Column(name = "status_delete_")

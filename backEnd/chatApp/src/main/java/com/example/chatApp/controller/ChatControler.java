@@ -18,10 +18,12 @@ public class ChatControler {
     @Autowired
     ChatService chatService;
 
-    @RequestMapping("/chat/{id_link_user}")
-    public ApiRespone<List<ChatRespone>> getChat(@PathVariable(name = "id_link_user") String idLinkUser_){
+    @RequestMapping("/chat/{id_user_}/{id_friend_}")
+    public ApiRespone<List<ChatRespone>> getChat(@PathVariable(name = "id_user_") String idUser_,
+                                                 @PathVariable(name = "id_friend_") String idFriend_){
 
-        return chatService.getChat(idLinkUser_);
+
+        return chatService.getChat(idUser_,idFriend_);
     }
 
     @PostMapping("/chat")

@@ -57,7 +57,7 @@ class User_profile_edit_setting_ extends State<User_profile_edit_> {
 
     return Scaffold(
         backgroundColor: colorBackGround_1_,
-        bottomNavigationBar: Custom_navbar_1_(3),
+        bottomNavigationBar: Custom_navbar_1_(2),
         body: SingleChildScrollView(
           child: Column(
             children: [

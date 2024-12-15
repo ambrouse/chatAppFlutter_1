@@ -28,7 +28,7 @@ public class HomeServiece {
         }
 
         List<ListFriendRespone> listFriendRespones = tuplesUserFriend_.stream().map(t->new ListFriendRespone(
-                t.get("idLinkUser_",String.class),
+                t.get("idUserFriend_",String.class),
                 t.get("nameFriend_",String.class),
                 t.get("linkImg_",String.class)
         )).collect(Collectors.toList());

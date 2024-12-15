@@ -10,9 +10,10 @@ import java.util.List;
 
 public interface ChatRepo extends JpaRepository<ChatEntity,String> {
 
-    @Query(value = "select id_ as id_, content_ as content_ " +
-            "from chat_ " +
-            "where status_delete_ = 1 and id_link_user_ = :idLinkUser " +
-            "ORDER  by day_send_ ASC",nativeQuery = true)
-    List<Tuple> getChatByIdLinkUser(@Param("idLinkUser") String idLinkUser_);
+    @Query(value = "select id_ as id_, content_ as content_, id_user_send_ as idUserSend_ " +
+            "from chat_ c " +
+            "where  (c.id_user_send_ = :idUser_ or c.id_user_send_ = :idFriend_) and (c.id_user_receive_ = :idUser_ or c.id_user_receive_ = :idFriend_) " +
+            "ORDER  by c.day_send_ asc",nativeQuery = true)
+    List<Tuple> getChatByUserAndFriend(@Param("idUser_") String idUser_,
+                                       @Param("idFriend_") String idFriend_);
 }
