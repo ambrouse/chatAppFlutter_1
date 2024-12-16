@@ -5,6 +5,7 @@ import com.example.chatApp.model.repo.BlogRepo;
 import com.example.chatApp.model.request.CreateBlogRequest;
 import com.example.chatApp.model.request.CreateHeartRequest;
 import com.example.chatApp.model.request.CreateLikeRequest;
+import com.example.chatApp.model.request.UpdateLinkImgBlogRequest;
 import com.example.chatApp.model.respone.BlogRespone;
 import com.example.chatApp.model.respone.CreateBlogRespone;
 import com.example.chatApp.service.BlogService;
@@ -46,16 +47,24 @@ public class BlogController {
         return blogService.createHeart(createHeartRequest);
     }
 
-    @DeleteMapping("/blog_heart/{id_heart}")
-    public ApiRespone<CreateBlogRespone> deleteHeart(@PathVariable(name = "id_heart") String idHeart_){
+    @DeleteMapping("/blog_heart/{id_user}/{id_blog}")
+    public ApiRespone<CreateBlogRespone> deleteHeart(@PathVariable(name = "id_user") String idUser_,
+                                                     @PathVariable(name = "id_blog") String idBlog_){
 
-        return blogService.deleteHeart(idHeart_);
+        return blogService.deleteHeart(idUser_,idBlog_);
     }
 
     @DeleteMapping("/blog_like/{id_like}")
     public ApiRespone<CreateBlogRespone> deleteLike(@PathVariable(name = "id_like") String idLike_){
 
         return blogService.deleteLike(idLike_);
+    }
+
+
+    @PutMapping("/update_img_blog")
+    public ApiRespone<CreateBlogRespone> deleteLike(@RequestBody UpdateLinkImgBlogRequest updateLinkImgBlogRequest){
+
+        return blogService.updateImageBlog(updateLinkImgBlogRequest);
     }
 
 

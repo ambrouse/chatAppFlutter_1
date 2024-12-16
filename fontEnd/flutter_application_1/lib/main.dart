@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/component/page/blog/blog_page_.dart';
+import 'package:flutter_application_1/component/page/blog/create_blog_page_.dart';
 import 'package:flutter_application_1/component/page/chat/chat_page_.dart';
+import 'package:flutter_application_1/component/page/find_friend/find_friend_page_.dart';
 import 'package:flutter_application_1/component/page/home/home_page_.dart';
 import 'package:flutter_application_1/component/page/login_sigup/login_page_.dart';
 import 'package:flutter_application_1/component/page/login_sigup/sigup_page_.dart';
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
 
     return SafeArea(
       child: MaterialApp(
-        home: Home_page_(),
+        home: Login_page_(),
         debugShowCheckedModeBanner: false,
         routes: {
           "/user/login": (context) => const Login_page_(),
@@ -35,8 +38,11 @@ class MyApp extends StatelessWidget {
           "/user/user_profile_edit_info": (context) => User_profile_edit_(),
           "/user/user_profile_edit_blog": (context) => User_profile_edit_blog_page_(),
           "/user/user_profile_edit_blog_detail_": (context) => User_profile_edit_blog_detail_page_(),
+          "/user/find_friend": (context) => find_friend_page_(),
           "/user/user_profile_edit_request_friend_": (context) => User_profile_edit_request_friend_(),
           "/user/chat": (context) => Chat_page_(),
+          "/user/blog": (context) => Blog_page_(),
+          "/user/create_blog": (context) => Create_blog_page_(),
         },
       ),
     );

@@ -16,4 +16,11 @@ public interface LinkUserRepo extends JpaRepository<LinkUserEntity,String> {
     List<Tuple> getLinkUserByIdUser(@Param("idUser_") String idUser_,
                                     @Param("nameUser_") String nameUser_);
 
+
+    @Query(value = "select id_ " +
+            "from link_user_ l " +
+            "where l.id_user_ = :idUser_ and l.id_user_friend_ = :idFriend_ and l.status_delete_=1 ",nativeQuery = true)
+    List<Tuple> checkLinkUserById(@Param("idUser_") String idUser_,
+                                    @Param("idFriend_") String idFriend_);
+
 }

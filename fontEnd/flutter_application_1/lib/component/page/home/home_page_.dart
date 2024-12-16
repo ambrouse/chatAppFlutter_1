@@ -25,10 +25,6 @@ class Home_page_setting_ extends State<Home_page_> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    functionTest().then((data) {
-      print(data);
-    });
     functionGetFriend("").then((data) {
       setState(() {
         friend_ = data;
@@ -52,7 +48,7 @@ class Home_page_setting_ extends State<Home_page_> {
             children: [
               Container(
                 child: Custom_text_1_(
-                    "titleText_", colorBackGround_2_, sizeText_3_),
+                    "Trang chủ", colorBackGround_2_, sizeText_3_),
               ),
               Container(
                 height: 30,
@@ -66,7 +62,7 @@ class Home_page_setting_ extends State<Home_page_> {
                           child: Container(
                             width: (width_ / 1.6),
                             child: Custom_text_field(
-                                textEditingControllerNameFriend_, "title", 1),
+                                textEditingControllerNameFriend_, "Tìm kiếm bạn bè.", 1),
                           ),
                         )),
                     Expanded(
@@ -145,14 +141,17 @@ class Home_page_setting_ extends State<Home_page_> {
                                                   decoration: BoxDecoration(
                                                       image: DecorationImage(
                                                           fit: BoxFit.cover,
-                                                          image: Image.file(File(
+                                                          image: friend_[1].data["result_"][index]["linkImgFriend_"]=="1"?
+                                                          AssetImage("assets/backiee-124549-landscape.jpg")
+                                                          :Image.file(File(
                                                                   friend_[1].data[
                                                                               "result_"]
                                                                           [
                                                                           index]
                                                                       [
                                                                       "linkImgFriend_"]))
-                                                              .image),
+                                                              .image
+                                                              ),
                                                       borderRadius:
                                                           BorderRadius.all(
                                                         Radius.circular(100000),

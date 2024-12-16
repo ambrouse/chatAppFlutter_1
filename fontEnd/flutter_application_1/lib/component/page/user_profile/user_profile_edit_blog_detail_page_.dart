@@ -29,7 +29,7 @@ class User_profile_edit_blog_detail_page_setting_
   TextEditingController textEditingControllerContent_ = TextEditingController();
   var previewImage;
   var myBlogDetail_;
-  String nameImg_ = "testBlog.png";
+  String nameImg_ = "_img_blog.png";
   bool reload_ = false;
   @override
   Widget build(BuildContext context) {
@@ -166,7 +166,7 @@ class User_profile_edit_blog_detail_page_setting_
                               textEditingControllerContent_.text,
                               idBlog_ + "_" + nameImg_)
                           .then((data) {
-                        print(data);
+                        Navigator.pushNamed(context, "/user/user_profile_edit_blog");
                       });
                     },
                     child: Custom_buttom_1_("Lưu."),

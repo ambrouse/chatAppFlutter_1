@@ -4,6 +4,7 @@ import com.example.chatApp.api_setting.ApiRespone;
 import com.example.chatApp.err.CustomRuntimeEception;
 import com.example.chatApp.model.entity.FriendRequestEntity;
 import com.example.chatApp.model.repo.FriendrequestRepo;
+import com.example.chatApp.model.repo.LinkUserRepo;
 import com.example.chatApp.model.repo.UserRepo;
 import com.example.chatApp.model.request.CreateFriendRequest;
 import com.example.chatApp.model.respone.CreateBlogRespone;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,8 @@ public class RequestFriendService {
     FriendrequestRepo friendrequestRepo;
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    LinkUserRepo linkUserRepo;
 
     public ApiRespone<List<UserRespone>> getUser(String name_,String idUser_){
         List<Tuple> tuplesUser_ = userRepo.getUserByName(name_,idUser_);
@@ -34,6 +38,36 @@ public class RequestFriendService {
                 t.get("id_",String.class),
                 t.get("linkImg_",String.class)
         )).collect(Collectors.toList());
+
+        List<Integer> j = new ArrayList<>();
+        for(int i = 0; i < userRespones.stream().count(); i++){
+            List<Tuple> tuplesCheck_ = linkUserRepo.checkLinkUserById(idUser_,userRespones.get(i).getId_());
+            if(tuplesCheck_.isEmpty()==false){
+                j.add(i);
+            }
+        }
+
+        for(int i = (int)(j.stream().count()-1);i>=0;i--){
+            userRespones.remove(userRespones.get(j.get(i)));
+        }
+
+
+        j = new ArrayList<>();
+        for(int i = 0; i < userRespones.stream().count(); i++){
+            List<Tuple> tuplesCheck_ = friendrequestRepo.checkRequestFriendById(idUser_,userRespones.get(i).getId_());
+            System.out.println(tuplesCheck_);
+            if(tuplesCheck_.isEmpty()==false){
+                j.add(i);
+            }
+        }
+
+        for(int i = (int)(j.stream().count()-1);i>=0;i--){
+            userRespones.remove(userRespones.get(j.get(i)));
+        }
+
+        if(userRespones.isEmpty()){
+            throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("").build());
+        }
 
         return ApiRespone.<List<UserRespone>>builder()
                 .respone_(200)

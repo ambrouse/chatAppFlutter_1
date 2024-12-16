@@ -1,16 +1,14 @@
-package com.example.chatApp.model.respone;
-
+package com.example.chatApp.model.request;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreateBlogRespone {
-    String desription_;
-    boolean checkCreate_;
+public class UpdateLinkImgBlogRequest {
     String idBlog_;
+    String linkImg_;
 }

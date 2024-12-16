@@ -93,7 +93,7 @@ class Sigup_page_setting_ extends State<Sigup_page_> {
                   Container(
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, "/user/sigup");
+                        Navigator.pushNamed(context, "/user/login");
                       },
                       child: Custom_buttom_1_("Đăng Nhập"),
                     ),
@@ -109,6 +109,7 @@ class Sigup_page_setting_ extends State<Sigup_page_> {
                             .then((data) {
                           setState(() {
                             if (data[0]) {
+                              Navigator.pushNamed(context, "/user/home");
                               errNofitication_ = "";
                             } else {
                               errNofitication_ = data[1].data["result_"];

@@ -12,4 +12,5 @@ public class CreateBlogRequest {
     String idUser_;
     String title_;
     String content_;
+    String linkImg_;
 }

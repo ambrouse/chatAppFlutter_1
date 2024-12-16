@@ -85,11 +85,9 @@ class Login_page_setting_ extends State<Login_page_> {
                             .then((data) {
                           setState(() {
                             if (data[0]) {
-                              // Navigator.pushNamed(context, "");
+                              Navigator.pushNamed(context, "/user/home");
                               errNofitication_ = "";
-                              print(data);
                             } else {
-                              print(data);
                               errNofitication_ = data[1].data["result_"];
                             }
                           });

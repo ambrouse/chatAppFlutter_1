@@ -43,7 +43,11 @@ class User_profile_edit_setting_ extends State<User_profile_edit_> {
             textEditingControllerEmail_.text = userInfor["email_"];
             textEditingControllerPassword_.text = userInfor["password_"];
             textEditingControllerAge_.text = userInfor["age_"];
-            fileImg_ = Image.file(File(userInfor["linkImg_"]));
+            if (userInfor["linkImg_"] == "1") {
+              fileImg_ = null;
+            } else {
+              fileImg_ = Image.file(File(userInfor["linkImg_"]));
+            }
           }
         });
       });
@@ -158,7 +162,10 @@ class User_profile_edit_setting_ extends State<User_profile_edit_> {
                                           textEditingControllerPassword_.text,
                                           textEditingControllerAge_.text,
                                           nameImg_)
-                                      .then((data) {});
+                                      .then((data) {
+                                    Navigator.pushNamed(
+                                        context, "/user/user_profile_root");
+                                  });
                                 },
                                 child: Custom_buttom_1_("Cập nhật."),
                               ),

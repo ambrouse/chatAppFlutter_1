@@ -8,9 +8,11 @@ import com.example.chatApp.model.entity.LikeEntity;
 import com.example.chatApp.model.repo.BlogRepo;
 import com.example.chatApp.model.repo.HeartRepo;
 import com.example.chatApp.model.repo.LikeRepo;
+import com.example.chatApp.model.repo.LinkUserRepo;
 import com.example.chatApp.model.request.CreateBlogRequest;
 import com.example.chatApp.model.request.CreateHeartRequest;
 import com.example.chatApp.model.request.CreateLikeRequest;
+import com.example.chatApp.model.request.UpdateLinkImgBlogRequest;
 import com.example.chatApp.model.respone.BlogRespone;
 import com.example.chatApp.model.respone.CreateBlogRespone;
 import jakarta.persistence.Tuple;
@@ -32,16 +34,19 @@ public class BlogService {
     LikeRepo likeRepo;
     @Autowired
     HeartRepo heartRepo;
+    @Autowired
+    LinkUserRepo linkUserRepo;
 
 
     public ApiRespone<List<BlogRespone>> getBlog(String idUser_){
         try {
+
+            List<Tuple> tuplesFriend_ = linkUserRepo.getLinkUserByIdUser(idUser_,"");
+
             List<Tuple> tuplesBlog_ = blogRepo.getBlogFriend(idUser_);
 
             List<BlogRespone> blogRespones = tuplesBlog_.stream().map(t-> new BlogRespone(
                     t.get("id_",String.class),
-                    t.get("titleMini_", String.class),
-                    t.get("contentMini_",String.class),
                     t.get("title_",String.class),
                     t.get("content_",String.class),
                     0,
@@ -54,6 +59,28 @@ public class BlogService {
                     t.get("linkImgBlog_",String.class),
                     t.get("linkImgUser_",String.class)
             )).collect(Collectors.toList());
+
+            for (Tuple i:tuplesFriend_){
+                List<Tuple> tuplesBlogCurent_ = blogRepo.getBlogFriend(i.get("idUserFriend_").toString());
+                List<BlogRespone> blogResponesCurent_ = tuplesBlogCurent_.stream().map(t-> new BlogRespone(
+                        t.get("id_",String.class),
+                        t.get("title_",String.class),
+                        t.get("content_",String.class),
+                        0,
+                        0,
+                        false,
+                        false,
+                        "",
+                        "",
+                        t.get("name_",String.class),
+                        t.get("linkImgBlog_",String.class),
+                        t.get("linkImgUser_",String.class)
+                )).collect(Collectors.toList());
+                for(BlogRespone j:blogResponesCurent_){
+                    blogRespones.add(j);
+                }
+            }
+
             for(BlogRespone i : blogRespones){
                 i.setLike_(likeRepo.countLikeByFriendBlog(i.getId_()));
                 i.setHeart_(heartRepo.countHeartByFriendBlog(i.getId_()));
@@ -80,17 +107,19 @@ public class BlogService {
         }
     }
 
-    public ApiRespone<CreateBlogRespone> createBlog(CreateBlogRequest createBlogRequest){
+    public ApiRespone<CreateBlogRespone> createBlog(CreateBlogRequest createBlogRequest) {
         BlogEntity blogEntity = BlogEntity.builder()
                 .dayBlog_(LocalDateTime.now())
                 .idUser_(createBlogRequest.getIdUser_())
                 .title_(createBlogRequest.getTitle_())
                 .content_(createBlogRequest.getContent_())
+                .linkImg_(createBlogRequest.getLinkImg_())
                 .statusDelete_(1)
                 .status_("1")
                 .build();
+        BlogEntity blogEntity1;
         try {
-            blogRepo.save(blogEntity);
+            blogEntity1 = blogRepo.save(blogEntity);
         } catch (RuntimeException e) {
             throw new RuntimeException(CustomRuntimeEception.builder()
                     .desriptionErr_("Lỗi hệ thống.")
@@ -100,6 +129,25 @@ public class BlogService {
         return ApiRespone.<CreateBlogRespone>builder()
                 .respone_(200)
                 .result_(CreateBlogRespone.builder()
+                        .idBlog_(blogEntity1.getId_())
+                        .checkCreate_(true)
+                        .desription_("Tạo blog thành công.")
+                        .build())
+                .build();
+    }
+
+    public ApiRespone<CreateBlogRespone> updateImageBlog(UpdateLinkImgBlogRequest updateLinkImgBlogRequest) {
+
+        BlogEntity blogEntity = blogRepo.findById(updateLinkImgBlogRequest.getIdBlog_()).get();
+
+        blogEntity.setLinkImg_(updateLinkImgBlogRequest.getLinkImg_());
+
+        blogRepo.save(blogEntity);
+
+        return ApiRespone.<CreateBlogRespone>builder()
+                .respone_(200)
+                .result_(CreateBlogRespone.builder()
+                        .idBlog_(blogEntity.getId_())
                         .checkCreate_(true)
                         .desription_("Tạo blog thành công.")
                         .build())
@@ -150,11 +198,19 @@ public class BlogService {
                 .build();
     }
 
-    public ApiRespone<CreateBlogRespone> deleteHeart(String idHeart_){
+    public ApiRespone<CreateBlogRespone> deleteHeart(String iduser_,String idBlog_){
         try {
-            HeartEntity heartEntity = heartRepo.findById(idHeart_).get();
-            heartEntity.setStatusDelete_(0);
-            heartRepo.save(heartEntity);
+            Tuple heartEntity = heartRepo.checkHeartByUser(idBlog_,iduser_);
+
+            System.out.println(heartEntity);
+            HeartEntity heartEntity1 = HeartEntity.builder()
+                    .id_(heartEntity.get(0).toString())
+                    .statusDelete_(0)
+                    .idBlog_(idBlog_)
+                    .idUser_(iduser_)
+                    .build();
+
+            heartRepo.save(heartEntity1);
         } catch (RuntimeException e) {
             throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("Lỗi hệ thống.").build());
         }

@@ -15,4 +15,11 @@ public interface FriendrequestRepo extends JpaRepository<FriendRequestEntity,Str
             "from friend_request_ f, user_ u " +
             "where id_user_friend_ = :idUser_ and u.id_ = f.id_user_ and f.status_delete_ = 1 and u.status_delete_ = 1",nativeQuery = true)
     List<Tuple> getRequestUserByIdUser(@Param("idUser_") String idUser_);
+
+
+    @Query(value = "select f.id_ as id_ " +
+            "from friend_request_ f " +
+            "where id_user_ = :idUser_ and f.id_user_friend_ = :idFriend_ and f.status_delete_ = 1 ",nativeQuery = true)
+    List<Tuple> checkRequestFriendById(@Param("idUser_") String idUser_,
+                                       @Param("idFriend_") String idFriend_);
 }

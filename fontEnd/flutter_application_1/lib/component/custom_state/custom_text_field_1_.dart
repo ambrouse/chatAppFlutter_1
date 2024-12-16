@@ -26,7 +26,7 @@ class Custom_text_field_setting extends State<Custom_text_field> {
     return TextField(
       controller: widget.textEditingController_,
       style: TextStyle(color: colorText_2_),
-      maxLines: 8,
+      maxLines: widget.maxLine_,
       decoration: InputDecoration(
           border: const OutlineInputBorder(),
           contentPadding: const EdgeInsets.only(top: 1, bottom: 1, left: 20),

@@ -17,12 +17,31 @@ public class SocketChatHand extends TextWebSocketHandler {
         sessions.add(session);
     }
 
+
+
+
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-        System.out.println(session.getId());
-        for(WebSocketSession webSocketSession : sessions){
-            if(!webSocketSession.getId().equals(session.getId())){
-                webSocketSession.sendMessage(message);
+        if(message.getPayload().equals("disconected")){
+//            System.out.println("disconected : "+session.getId());
+            sessions.remove(session);
+            session.close();
+        } else if (message.getPayload().equals("conected")) {
+//            System.out.println("conected : "+session.getId());
+            session.sendMessage(message);
+        } else{
+            for(WebSocketSession webSocketSession : sessions){
+                if(!webSocketSession.getId().equals(session.getId())){
+                    try {
+                        webSocketSession.sendMessage(message);
+                    } catch( Exception ex ) {
+//                        System.out.println("disconect - not send.");
+                        sessions.remove( webSocketSession );
+//                        synchronized( sessions ) {
+//                            sessions.remove( webSocketSession );
+//                        }
+                    }
+                }
             }
         }
 

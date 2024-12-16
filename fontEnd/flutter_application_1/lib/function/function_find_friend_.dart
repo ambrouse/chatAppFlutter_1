@@ -1,17 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
-Future<dynamic> functionGetChat(linkuser_) async {
+Future<dynamic> functionFindFriend(String nameFriend_) async {
   final dio = Dio();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   String idUser_ = sharedPreferences.getString("idUser_").toString();
   String token_ = sharedPreferences.getString("jwtToken_").toString();
   try {
     Response response = await dio.get(
-        "http://10.0.2.2:9090/chat_app/api/v1/chat/" +
-            linkuser_ +
-            "/" +
+        "http://10.0.2.2:9090/chat_app/api/v1/send_request_friend?name_=" +
+            nameFriend_ +
+            "&id_user=" +
             idUser_,
         data: {},
         options: Options(
@@ -19,47 +18,28 @@ Future<dynamic> functionGetChat(linkuser_) async {
             headers: {'Authorization': ""}));
     return response;
   } on DioException catch (e) {
-    return e?.response;
+    return null;
   }
 }
 
-Future<dynamic> functionSendChat(idFriend_, content_) async {
+
+Future<dynamic> functionRequestFriend(String idFriend_) async {
   final dio = Dio();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   String idUser_ = sharedPreferences.getString("idUser_").toString();
   String token_ = sharedPreferences.getString("jwtToken_").toString();
   try {
     Response response = await dio.post(
-        "http://10.0.2.2:9090/chat_app/api/v1/chat",
+        "http://10.0.2.2:9090/chat_app/api/v1/send_request_friend",
         data: {
-          "idUser_": idUser_,
-          "iduserFriend_": idFriend_,
-          "content_": content_
+          "idUser_":idUser_,
+          "idUserFriend_":idFriend_
         },
         options: Options(
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return response;
   } on DioException catch (e) {
-    return e?.response;
+    return null;
   }
-}
-
-Future<dynamic> functionConectSocket() async {
-  final wsUrl = Uri.parse('ws://10.0.2.2:9090/ws');
-  final channel = WebSocketChannel.connect(wsUrl);
-
-  await channel.ready;
-
-  return channel;
-}
-
-Future<dynamic> functionSendMessWebSocket() async {
-  final wsUrl = Uri.parse('ws://10.0.2.2:9090/ws');
-  final channel = WebSocketChannel.connect(wsUrl);
-  await channel.ready;
-  channel.sink.add("conected");
-
-  
-  return channel;
 }

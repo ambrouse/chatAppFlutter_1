@@ -1,12 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/component/custom_state/custom_back_button_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_button_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_navbar_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_text_1_.dart';
-import 'package:flutter_application_1/component/custom_state/custom_text_field_1_.dart';
-import 'package:flutter_application_1/component/page/user_profile/user_profile_edit_page_.dart';
 import 'package:flutter_application_1/function/function_profile_user_.dart';
 import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 
@@ -27,7 +24,6 @@ class User_profile_root_page_setting_ extends State<User_profile_root_page_> {
         setState(() {
           userInfo_ = data[1].data['result_'];
           checkRequest_ = true;
-          print(data);
         });
       } else {
         setState(() {
@@ -155,8 +151,11 @@ class User_profile_root_page_setting_ extends State<User_profile_root_page_> {
                               Container(
                                 margin: EdgeInsets.only(top: 20),
                                 child: InkWell(
-                                  onTap: () {},
-                                  child: Custom_buttom_1_("textTitle_"),
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, "/user/create_blog");
+                                  },
+                                  child: Custom_buttom_1_("Thêm bài viết."),
                                 ),
                               )
                             ],

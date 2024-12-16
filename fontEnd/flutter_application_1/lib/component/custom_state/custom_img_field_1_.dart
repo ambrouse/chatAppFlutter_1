@@ -9,10 +9,9 @@ Future<dynamic> loadImageLocal(nameImg_) async {
         await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       String path_ = await saveImage(File(pickedFile.path), nameImg_);
-      print(path_);
       return path_;
     }
-    return "err";
+    return null;
   } catch (e) {
     print("Error picking image: $e");
   }
@@ -24,3 +23,11 @@ Future<String> saveImage(File image, String nameImg_) async {
   await image.copy(path);
   return path;
 }
+
+
+Future<String> loadUrlImage() async {
+  final directory = await getApplicationDocumentsDirectory();
+  return directory.path;
+}
+
+

@@ -32,7 +32,7 @@ public class ChatService {
                 t.get("idUserSend_",String.class)
         )).collect(Collectors.toList());
 
-        if(tuplesChat_.isEmpty()){throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("not chat").build());}
+        if(tuplesChat_.isEmpty()){throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("Hãy bắt đầu cuộc trò chuyện bằng lời chào.").build());}
 
         System.out.println(tuplesChat_);
         return ApiRespone.<List<ChatRespone>>builder()

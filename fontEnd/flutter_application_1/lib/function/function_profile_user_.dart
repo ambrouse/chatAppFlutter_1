@@ -143,7 +143,6 @@ Future<dynamic> functionGetRequestFriend() async {
 
 Future<dynamic> functionDeleteRequestFriend(String idRequestFriend_) async {
   final dio = Dio();
-  print(idRequestFriend_);
   try {
     Response response = await dio.delete(
         "http://10.0.2.2:9090/chat_app/api/v1/request_friend/" +
