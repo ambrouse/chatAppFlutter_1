@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -105,12 +106,7 @@ class find_friend_page_setting_ extends State<find_friend_page_> {
                                                   fit: BoxFit.cover,
                                                   image: listuser_.data["result_"][index]["linkImg_"]=="1"?
                                                   AssetImage("assets/backiee-124549-landscape.jpg")
-                                                  :Image.file(File(
-                                                          listuser_.data[
-                                                                      "result_"]
-                                                                  [index]
-                                                              ["linkImg_"]))
-                                                      .image),
+                                                  :Image.memory(base64Decode(listuser_.data["result_"][index]["linkImg_"])).image),
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(100000),
                                               ),

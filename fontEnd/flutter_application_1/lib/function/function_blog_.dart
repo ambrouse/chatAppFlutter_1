@@ -61,7 +61,7 @@ Future<dynamic> functionDeleteHeart(idBlog) async {
 }
 
 
-Future<dynamic> functionCreateBlog(title,content) async {
+Future<dynamic> functionCreateBlog(title,content,image) async {
   final dio = Dio();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   String idUser_ = sharedPreferences.getString("idUser_").toString();
@@ -73,7 +73,7 @@ Future<dynamic> functionCreateBlog(title,content) async {
           "idUser_":idUser_,
           "title_":title,
           "content_":content,
-          "linkImg_":""
+          "linkImg_":image
         },
         options: Options(
             contentType: Headers.jsonContentType,

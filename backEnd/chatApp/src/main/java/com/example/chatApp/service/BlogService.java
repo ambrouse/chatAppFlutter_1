@@ -86,7 +86,6 @@ public class BlogService {
                 i.setHeart_(heartRepo.countHeartByFriendBlog(i.getId_()));
                 Tuple tupleIdLike_ = likeRepo.checkLikeByUser(i.getId_(),idUser_);
                 Tuple tupleHeart_ = heartRepo.checkHeartByUser(i.getId_(),idUser_);
-                System.out.println(tupleIdLike_);
                 if(tupleIdLike_!=null){
                     i.setCheckLike_(true);
                     i.setIdLike_(tupleIdLike_.get(0).toString());
@@ -96,6 +95,8 @@ public class BlogService {
                     i.setIdHeart_(tupleHeart_.get(0).toString());
                 }
             }
+
+            if(blogRespones.isEmpty()){throw new RuntimeException(CustomRuntimeEception.builder().desriptionErr_("null").build());}
 
             return ApiRespone.<List<BlogRespone>>builder()
                     .respone_(200)
@@ -201,8 +202,6 @@ public class BlogService {
     public ApiRespone<CreateBlogRespone> deleteHeart(String iduser_,String idBlog_){
         try {
             Tuple heartEntity = heartRepo.checkHeartByUser(idBlog_,iduser_);
-
-            System.out.println(heartEntity);
             HeartEntity heartEntity1 = HeartEntity.builder()
                     .id_(heartEntity.get(0).toString())
                     .statusDelete_(0)

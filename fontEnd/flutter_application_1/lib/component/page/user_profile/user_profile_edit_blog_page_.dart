@@ -25,7 +25,6 @@ class User_profile_edit_blog_page_setting_
       if (data[0]) {
         setState(() {
           myBlogItem_ = data[1].data["result_"];
-          print(myBlogItem_.length);
         });
       } else {
         errNofitication_ = data[1]["result_"];

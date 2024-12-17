@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -23,7 +24,6 @@ class Blog_page_setting_ extends State<Blog_page_> {
     super.initState();
     functionGetBlog().then((data) {
       setState(() {
-        print(data);
         listBlog_ = data;
       });
     });
@@ -44,14 +44,16 @@ class Blog_page_setting_ extends State<Blog_page_> {
             children: [
               Container(
                 margin: EdgeInsets.only(top: 30),
-                child: Custom_text_1_(
-                    "Bài viết trong vòng bạn bè", colorBackGround_2_, sizeText_3_),
+                child: Custom_text_1_("Bài viết trong vòng bạn bè",
+                    colorBackGround_2_, sizeText_3_),
               ),
               listBlog_ == null
                   ? Container(
                       margin: EdgeInsets.only(top: 50),
                       child: Custom_text_1_(
-                          "Load.....", colorBackGround_2_, sizeText_3_),
+                          "Không có bài viết nào trong vòng bạn bè.",
+                          colorBackGround_2_,
+                          sizeText_2_),
                     )
                   : Expanded(
                       child: Container(
@@ -82,21 +84,35 @@ class Blog_page_setting_ extends State<Blog_page_> {
                                               width: 40,
                                               height: 40,
                                               decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(Radius.circular(100000)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(100000)),
                                                 border: Border.all(
-                                                  color: colorBackGround_1_
-                                                ),
+                                                    color: colorBackGround_1_),
                                                 image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image:  listBlog_.data["result_"][index]["linkImgUser_"]=="1"?
-                                                  AssetImage("assets/backiee-124549-landscape.jpg")
-                                                  :Image.file(File(listBlog_.data["result_"][index]["linkImgUser_"])).image
-                                                  )
+                                                    fit: BoxFit.cover,
+                                                    image: listBlog_.data[
+                                                                        "result_"]
+                                                                    [index][
+                                                                "linkImgUser_"] ==
+                                                            "1"
+                                                        ? AssetImage(
+                                                            "assets/backiee-124549-landscape.jpg")
+                                                        : Image.memory(base64Decode(
+                                                                listBlog_.data[
+                                                                            "result_"]
+                                                                        [index]
+                                                                    ["linkImgUser_"]))
+                                                            .image),
                                               ),
                                             ),
                                             Container(
-                                              padding: EdgeInsets.only(left: 30),
-                                              child: Custom_text_1_(listBlog_.data["result_"][index]["nameUser_"], colorBackGround_1_, sizeText_2_),
+                                              padding:
+                                                  EdgeInsets.only(left: 30),
+                                              child: Custom_text_1_(
+                                                  listBlog_.data["result_"]
+                                                      [index]["nameUser_"],
+                                                  colorBackGround_1_,
+                                                  sizeText_2_),
                                             )
                                           ],
                                         )
@@ -138,9 +154,10 @@ class Blog_page_setting_ extends State<Blog_page_> {
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
                                               fit: BoxFit.cover,
-                                              image: Image.file(File(listBlog_
-                                                          .data["result_"]
-                                                      [index]["linkImgBlog_"]))
+                                              image: Image.memory(base64Decode(
+                                                      listBlog_.data["result_"]
+                                                              [index]
+                                                          ["linkImgBlog_"]))
                                                   .image),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20))),

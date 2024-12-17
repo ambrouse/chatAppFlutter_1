@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class User_profile_edit_blog_detail_page_setting_
   TextEditingController textEditingControllerContent_ = TextEditingController();
   var previewImage;
   var myBlogDetail_;
-  String nameImg_ = "_img_blog.png";
+  var imgEncode_;
   bool reload_ = false;
   @override
   Widget build(BuildContext context) {
@@ -44,9 +45,8 @@ class User_profile_edit_blog_detail_page_setting_
               myBlogDetail_[1].data["result_"]["title_"];
           textEditingControllerContent_.text =
               myBlogDetail_[1].data["result_"]["content_"];
-          previewImage = Image.file(
-            File(myBlogDetail_[1].data["result_"]["linkImg_"]),
-          );
+            previewImage = Image.memory(
+                base64Decode(myBlogDetail_[1].data["result_"]["linkImg_"]));
         });
       });
     }
@@ -122,13 +122,7 @@ class User_profile_edit_blog_detail_page_setting_
                                 1),
                           ),
                         ),
-                  previewImage == null
-                      ? Container(
-                          alignment: Alignment.center,
-                          child: Custom_text_1_("load img .....",
-                              colorBackGround_2_, sizeText_3_),
-                        )
-                      : Center(
+                  Center(
                           child: Container(
                             margin: EdgeInsets.only(top: 50),
                             width: (width_ / 1.3),
@@ -137,52 +131,57 @@ class User_profile_edit_blog_detail_page_setting_
                                 border: Border.all(
                                     color: colorBackGround_2_, width: 1),
                                 image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: previewImage.image)),
+                                    fit: BoxFit.cover, 
+                                    image: previewImage==null?
+                                    AssetImage("assets/backiee-124549-landscape.jpg"):
+                                    previewImage.image
+                                    )),
                           ),
                         ),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
+                      margin: EdgeInsets.only(top: 20),
                       child: InkWell(
-                    onTap: () {
-                      loadImageLocal(idBlog_ + "_" + nameImg_).then((data) {
-                        setState(() {
-                          imageCache.evict(previewImage.image,
-                              includeLive: true);
-                          previewImage = Image.file(File(data));
-                          print(data);
-                        });
-                      });
-                    },
-                    child: Custom_buttom_1_("Chọn ảnh."),
-                  )),
+                        onTap: () {
+                          loadImageLocal().then((data) {
+                            setState(() {
+                              if (data[0]) {
+                                previewImage = data[1];
+                                imgEncode_ = data[2];
+                              }
+                            });
+                          });
+                        },
+                        child: Custom_buttom_1_("Chọn ảnh."),
+                      )),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
+                      margin: EdgeInsets.only(top: 20),
                       child: InkWell(
-                    onTap: () {
-                      functionUpdateMyBlog(
-                              idBlog_,
-                              textEditingControllerTitle_.text,
-                              textEditingControllerContent_.text,
-                              idBlog_ + "_" + nameImg_)
-                          .then((data) {
-                        Navigator.pushNamed(context, "/user/user_profile_edit_blog");
-                      });
-                    },
-                    child: Custom_buttom_1_("Lưu."),
-                  )),
+                        onTap: () {
+                          functionUpdateMyBlog(
+                                  idBlog_,
+                                  textEditingControllerTitle_.text,
+                                  textEditingControllerContent_.text,
+                                  imgEncode_)
+                              .then((data) {
+                            Navigator.pushNamed(
+                                context, "/user/user_profile_edit_blog");
+                          });
+                        },
+                        child: Custom_buttom_1_("Lưu."),
+                      )),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
+                      margin: EdgeInsets.only(top: 20),
                       child: InkWell(
-                    onTap: () {
-                      functionDeleteMyBlog(
-                        idBlog_,
-                      ).then((data) {
-                        Navigator.pushNamed(context, "/user/user_profile_edit_blog");
-                      });
-                    },
-                    child: Custom_buttom_1_("Xóa bài viết."),
-                  )),
+                        onTap: () {
+                          functionDeleteMyBlog(
+                            idBlog_,
+                          ).then((data) {
+                            Navigator.pushNamed(
+                                context, "/user/user_profile_edit_blog");
+                          });
+                        },
+                        child: Custom_buttom_1_("Xóa bài viết."),
+                      )),
                 ],
               ),
       ),

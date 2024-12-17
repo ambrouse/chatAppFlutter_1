@@ -22,7 +22,7 @@ class Create_blog_page_setting_ extends State<Create_blog_page_> {
   TextEditingController textEditingControllerTitle_ = TextEditingController();
   TextEditingController textEditingControllerContent_ = TextEditingController();
   var previewImage;
-  var pikerImage_;
+  var imageEncode_;
   String errTitle_ = "";
   String errContent_ = "";
   String errImage_ = "";
@@ -117,16 +117,12 @@ class Create_blog_page_setting_ extends State<Create_blog_page_> {
                 margin: EdgeInsets.only(top: 20),
                 child: InkWell(
                   onTap: () {
-                    loadImageLocal("demo_create_blog.png").then((data) {
+                    loadImageLocal().then((data) {
                       setState(() {
-                        if (previewImage != null) {
-                          imageCache.evict(previewImage.image,
-                              includeLive: true);
-                        }
-                        if (data != null) {
+                        if (data[0]) {
                           errImage_ = "";
-                          previewImage = Image.file(File(data));
-                          pikerImage_ = File(data);
+                          previewImage = data[1];
+                          imageEncode_ = data[2];
                         }
                       });
                     });
@@ -162,36 +158,18 @@ class Create_blog_page_setting_ extends State<Create_blog_page_> {
                         errTitle_ = "";
                         errContent_ = "Không được để trống nội dung.";
                       });
-                    } else if (pikerImage_ == null) {
+                    } else if (imageEncode_ == null) {
                       setState(() {
                         errContent_ = "";
                         errImage_ = "Không được để trống ảnh.";
                       });
                     } else {
-                      functionCreateBlog(textEditingControllerTitle_.text,
-                              textEditingControllerContent_.text)
-                          .then((data) {
-                        if (pikerImage_ != null) {
-                          saveImage(
-                                  pikerImage_,
-                                  data.data["result_"]["idBlog_"] +
-                                      "_img_blog.png")
-                              .then((data_) {
-                            loadUrlImage().then((data_url) {
-                              String img_path_ = data_url +
-                                  "/" +
-                                  data.data["result_"]["idBlog_"] +
-                                  nameImg_;
-                              functionUpdateImgBlog(
-                                      data.data["result_"]["idBlog_"],
-                                      img_path_)
-                                  .then((data__) {
-                                  Navigator.pushNamed(
-                                      context, "/user/user_profile_root");
-                              });
-                            });
-                          });
-                        }
+                      functionCreateBlog(
+                        textEditingControllerTitle_.text,
+                        textEditingControllerContent_.text,
+                        imageEncode_
+                      ).then((data) {
+                        Navigator.pushNamed(context, "/user/user_profile_root");
                       });
                     }
                   },

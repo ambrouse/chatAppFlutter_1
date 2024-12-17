@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -26,8 +27,7 @@ class User_profile_edit_setting_ extends State<User_profile_edit_> {
   TextEditingController textEditingControllerName_ = TextEditingController();
   TextEditingController textEditingControllerAge_ = TextEditingController();
   String errNofitication_ = "";
-  String pathImg_ = "";
-  String nameImg_ = "";
+  var fileImgEncode_;
   var fileImg_;
   var userInfor;
   @override
@@ -36,7 +36,6 @@ class User_profile_edit_setting_ extends State<User_profile_edit_> {
     functionGetUserInfo().then((data) {
       getIdUser().then((data_) {
         setState(() {
-          nameImg_ = data_ + "_" + "myProfileAvarta.png";
           if (data[0]) {
             userInfor = data[1].data["result_"];
             textEditingControllerName_.text = userInfor["name_"];
@@ -46,7 +45,7 @@ class User_profile_edit_setting_ extends State<User_profile_edit_> {
             if (userInfor["linkImg_"] == "1") {
               fileImg_ = null;
             } else {
-              fileImg_ = Image.file(File(userInfor["linkImg_"]));
+              fileImg_ = Image.memory(base64Decode(userInfor["linkImg_"]));
             }
           }
         });
@@ -135,12 +134,12 @@ class User_profile_edit_setting_ extends State<User_profile_edit_> {
                         margin: EdgeInsets.only(top: 20),
                         child: InkWell(
                           onTap: () {
-                            loadImageLocal(nameImg_).then((data) {
+                            loadImageLocal().then((data) {
                               setState(() {
-                                imageCache.evict(fileImg_.image,
-                                    includeLive: true);
-                                print(data);
-                                fileImg_ = Image.file(File(data));
+                                if (data[0]) {
+                                  fileImg_ = data[1];
+                                  fileImgEncode_ = data[2];
+                                }
                               });
                             });
                           },
@@ -161,7 +160,7 @@ class User_profile_edit_setting_ extends State<User_profile_edit_> {
                                           textEditingControllerEmail_.text,
                                           textEditingControllerPassword_.text,
                                           textEditingControllerAge_.text,
-                                          nameImg_)
+                                          fileImgEncode_)
                                       .then((data) {
                                     Navigator.pushNamed(
                                         context, "/user/user_profile_root");

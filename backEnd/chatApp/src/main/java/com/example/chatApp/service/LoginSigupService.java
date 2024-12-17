@@ -78,6 +78,7 @@ public class LoginSigupService {
                     .name_(sigupRequest.getName_())
                     .idAuthentication_(tupleIdUserByEmail_.get(0).toString())
                     .age_(sigupRequest.getAge_())
+                    .linkImg_("1")
                     .build();
             userRepo.save(userEntity);
 

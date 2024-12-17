@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -143,15 +144,7 @@ class Home_page_setting_ extends State<Home_page_> {
                                                           fit: BoxFit.cover,
                                                           image: friend_[1].data["result_"][index]["linkImgFriend_"]=="1"?
                                                           AssetImage("assets/backiee-124549-landscape.jpg")
-                                                          :Image.file(File(
-                                                                  friend_[1].data[
-                                                                              "result_"]
-                                                                          [
-                                                                          index]
-                                                                      [
-                                                                      "linkImgFriend_"]))
-                                                              .image
-                                                              ),
+                                                          :Image.memory(base64Decode(friend_[1].data["result_"][index]["linkImgFriend_"])).image),
                                                       borderRadius:
                                                           BorderRadius.all(
                                                         Radius.circular(100000),

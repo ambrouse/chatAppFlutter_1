@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
 
     return SafeArea(
       child: MaterialApp(
-        home: Login_page_(),
+        home: User_profile_root_page_(),
         debugShowCheckedModeBanner: false,
         routes: {
           "/user/login": (context) => const Login_page_(),

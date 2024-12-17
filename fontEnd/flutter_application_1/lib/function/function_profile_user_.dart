@@ -42,7 +42,7 @@ Future<dynamic> functionUpdateUser(
           "password_": password_,
           "name_": name_,
           "age_": age_,
-          "linkImg_": a.path + "/" + nameImg_
+          "linkImg_": nameImg_
         },
         options: Options(
             contentType: Headers.jsonContentType,
@@ -97,7 +97,7 @@ Future<dynamic> functionUpdateMyBlog(
           "idBlog_": idBlog_,
           "title_": title_,
           "content_": content_,
-          "linkImg_": a.path + "/" + linkImg_,
+          "linkImg_": linkImg_,
         },
         options: Options(
             contentType: Headers.jsonContentType,

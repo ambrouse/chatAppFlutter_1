@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -66,8 +67,9 @@ class User_profile_root_page_setting_ extends State<User_profile_root_page_> {
                                     image: userInfo_["linkImg_"] == "1"
                                         ? AssetImage(
                                             "assets/backiee-124549-landscape.jpg")
-                                        : FileImage(
-                                            File(userInfo_["linkImg_"])))),
+                                        : Image.memory(base64Decode(userInfo_["linkImg_"])).image
+                                            )
+                                            ),
                           ),
                         ),
                   userInfo_ == null
