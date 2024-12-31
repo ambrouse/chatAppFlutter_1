@@ -30,6 +30,7 @@
 ### Giao diện phát thảo và giao diện thực tế của app
 - Giao diện phát thảo trên figma
 <img src="./assetsReadme/giaodienphatthao.png" alt="!!err image loading." width="200"/>
+
 - Giao diện thực tế
 <img src="./assetsReadme/giaodienthucte.png" alt="!!err image loading." width="200"/>
 
