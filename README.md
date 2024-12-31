@@ -9,5 +9,5 @@
 - Phan Triệu Tỷ - tham gia đóng góp 5%.
 
 ## Tài liệu
-[Báo cáo chi tiết dự án](report\chat_app_chuyen_de_chuyen_sau_1_nguyen_le_quoc_bao_2100004053.docx)
+[Báo cáo chi tiết dự án](report/chat_app_chuyen_de_chuyen_sau_1_nguyen_le_quoc_bao_2100004053.docx)
 
