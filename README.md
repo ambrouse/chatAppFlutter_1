@@ -34,6 +34,9 @@
 - Giao diện thực tế
 <img src="./assetsReadme/giaodienthucte.png" alt="!!err image loading." width="200"/>
 
+## Video Demo cho dự án
+[![Watch video](https://img.youtube.com/vi/bt4DHiuNa_A/0.jpg)](https://www.youtube.com/watch?v=bt4DHiuNa_A&autoplay=1)
+
 ## Tài liệu
 [Báo cáo chi tiết dự án](report/chat_app_chuyen_de_chuyen_sau_1_nguyen_le_quoc_bao_2100004053.docx)
 
