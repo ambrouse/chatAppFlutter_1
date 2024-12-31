@@ -25,13 +25,13 @@
 - Figma (Thiết kế giao diện)
 
 ### Sơ đồ chức năng và url app
-<img src="./assetsReadme/anhmau.png" alt="!!err image loading." width="500"/>
+<img src="./assetsReadme/url.png" alt="!!err image loading." width="500"/>
 
 ### Giao diện phát thảo và giao diện thực tế của app
 - Giao diện phát thảo trên figma
-<img src="./assetsReadme/anhmau.png" alt="!!err image loading." width="300"/>
+<img src="./assetsReadme/giaodienphatthao.png" alt="!!err image loading." width="200"/>
 - Giao diện thực tế
-<img src="./assetsReadme/anhmau.png" alt="!!err image loading." width="300"/>
+<img src="./assetsReadme/giaodienthucte.png" alt="!!err image loading." width="200"/>
 
 ### Tài liệu
 [Báo cáo chi tiết dự án](report/chat_app_chuyen_de_chuyen_sau_1_nguyen_le_quoc_bao_2100004053.docx)
