@@ -8,16 +8,13 @@ Future<dynamic> functionFindFriend(String nameFriend_) async {
   String token_ = sharedPreferences.getString("jwtToken_").toString();
   try {
     Response response = await dio.get(
-        "http://10.0.2.2:9090/chat_app/api/v1/send_request_friend?name_=" +
-            nameFriend_ +
-            "&id_user=" +
-            idUser_,
+        "http://10.0.2.2:9090/chat_app/api/v1/send_request_friend?name_=$nameFriend_&id_user=$idUser_",
         data: {},
         options: Options(
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return response;
-  } on DioException catch (e) {
+  } on DioException {
     return null;
   }
 }
@@ -39,7 +36,7 @@ Future<dynamic> functionRequestFriend(String idFriend_) async {
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return response;
-  } on DioException catch (e) {
+  } on DioException {
     return null;
   }
 }

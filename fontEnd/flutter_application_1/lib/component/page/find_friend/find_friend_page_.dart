@@ -10,6 +10,8 @@ import 'package:flutter_application_1/function/function_find_friend_.dart';
 import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 
 class find_friend_page_ extends StatefulWidget {
+  const find_friend_page_({super.key});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -36,7 +38,7 @@ class find_friend_page_setting_ extends State<find_friend_page_> {
       bottomNavigationBar: Custom_navbar_1_(3),
       backgroundColor: colorBackGround_1_,
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: width_,
           height: (height_ - 100),
           child: Column(
@@ -48,7 +50,7 @@ class find_friend_page_setting_ extends State<find_friend_page_> {
                 height: 30,
                 child: Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: (width_ / 1.5),
                       child: Custom_text_field(
                           textEditingControllerSearch_, "Vui lòng nhập tên bạn muốn tìm.", 1),

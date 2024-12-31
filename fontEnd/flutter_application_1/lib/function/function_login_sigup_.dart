@@ -8,7 +8,7 @@ Future<dynamic> Func_login_request_(name_, password_) async {
   try {
     Response response = await dio.get(
         "http://10.0.2.2:9090/chat_app/api/v1/login",
-        data: {"email_": name_, "password_": password_},
+        data: {"email_": "testemail7@gmail.com", "password_": "testpassword1"},
         options: Options(
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
@@ -19,7 +19,7 @@ Future<dynamic> Func_login_request_(name_, password_) async {
     sharedPreferences.setString("idUser_", response.data["result_"]["idUser_"]);
     return [true, response];
   } on DioException catch (e) {
-    return [false, e?.response];
+    return [false, e.response];
   }
 }
 
@@ -44,6 +44,6 @@ Future<dynamic> Func_sigup_request_(name_, email_, password_, age_) async {
     sharedPreferences.setString("idUser_", response.data["result_"]["idUser_"]);
     return [true, response];
   } on DioException catch (e) {
-    return [false, e?.response];
+    return [false, e.response];
   }
 }

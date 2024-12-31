@@ -11,6 +11,8 @@ import 'package:flutter_application_1/function/function_home_.dart';
 import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 
 class Home_page_ extends StatefulWidget {
+  const Home_page_({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return Home_page_setting_();
@@ -42,7 +44,7 @@ class Home_page_setting_ extends State<Home_page_> {
       backgroundColor: colorBackGround_1_,
       bottomNavigationBar: Custom_navbar_1_(1),
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: width_,
           height: (height_ - 100),
           child: Column(
@@ -60,7 +62,7 @@ class Home_page_setting_ extends State<Home_page_> {
                     Expanded(
                         flex: 7,
                         child: Center(
-                          child: Container(
+                          child: SizedBox(
                             width: (width_ / 1.6),
                             child: Custom_text_field(
                                 textEditingControllerNameFriend_, "Tìm kiếm bạn bè.", 1),

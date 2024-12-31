@@ -9,6 +9,8 @@ import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
 class Blog_page_ extends StatefulWidget {
+  const Blog_page_({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return Blog_page_setting_();
@@ -37,7 +39,7 @@ class Blog_page_setting_ extends State<Blog_page_> {
       bottomNavigationBar: Custom_navbar_1_(0),
       backgroundColor: colorBackGround_1_,
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: width_,
           height: (height_ - 100),
           child: Column(

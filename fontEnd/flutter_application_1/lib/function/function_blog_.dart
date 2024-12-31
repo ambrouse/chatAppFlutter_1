@@ -9,13 +9,13 @@ Future<dynamic> functionGetBlog() async {
   String token_ = sharedPreferences.getString("jwtToken_").toString();
   try {
     Response response = await dio.get(
-        "http://10.0.2.2:9090/chat_app/api/v1/blog/"+idUser_,
+        "http://10.0.2.2:9090/chat_app/api/v1/blog/$idUser_",
         data: {},
         options: Options(
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return response;
-  } on DioException catch (e) {
+  } on DioException {
     return null;
   }
 }
@@ -37,7 +37,7 @@ Future<dynamic> functionCreateHeart(idBlog) async {
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return response;
-  } on DioException catch (e) {
+  } on DioException {
     return null;
   }
 }
@@ -49,13 +49,13 @@ Future<dynamic> functionDeleteHeart(idBlog) async {
   String token_ = sharedPreferences.getString("jwtToken_").toString();
   try {
     Response response = await dio.delete(
-        "http://10.0.2.2:9090/chat_app/api/v1/blog_heart/"+idUser_+"/"+idBlog,
+        "http://10.0.2.2:9090/chat_app/api/v1/blog_heart/$idUser_/"+idBlog,
         data: {},
         options: Options(
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return response;
-  } on DioException catch (e) {
+  } on DioException {
     return null;
   }
 }
@@ -79,7 +79,7 @@ Future<dynamic> functionCreateBlog(title,content,image) async {
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return response;
-  } on DioException catch (e) {
+  } on DioException {
     return null;
   }
 }
@@ -97,7 +97,7 @@ Future<dynamic> functionUpdateImgBlog(idBlog,linkImg) async {
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return response;
-  } on DioException catch (e) {
+  } on DioException {
     return null;
   }
 }

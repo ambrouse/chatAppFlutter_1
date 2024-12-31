@@ -9,6 +9,8 @@ import 'package:flutter_application_1/function/function_profile_user_.dart';
 import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 
 class User_profile_root_page_ extends StatefulWidget {
+  const User_profile_root_page_({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return User_profile_root_page_setting_();
@@ -45,7 +47,7 @@ class User_profile_root_page_setting_ extends State<User_profile_root_page_> {
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               width: width_,
               height: height_,
               child: Column(

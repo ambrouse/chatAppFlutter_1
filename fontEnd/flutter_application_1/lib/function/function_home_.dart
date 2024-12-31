@@ -11,16 +11,13 @@ Future<dynamic> functionGetFriend(String nameFriend_) async {
   //     "&name="+nameFriend_);
   try {
     Response response = await dio.get(
-        "http://10.0.2.2:9090/chat_app/api/v1/friends?id_user=" +
-            idUser_ +
-            "&name=" +
-            nameFriend_,
+        "http://10.0.2.2:9090/chat_app/api/v1/friends?id_user=$idUser_&name=$nameFriend_",
         data: {},
         options: Options(
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return [true, response];
   } on DioException catch (e) {
-    return [false, e?.response];
+    return [false, e.response];
   }
 }

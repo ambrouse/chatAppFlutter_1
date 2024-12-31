@@ -7,6 +7,8 @@ import 'package:flutter_application_1/function/function_profile_user_.dart';
 import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 
 class User_profile_edit_blog_page_ extends StatefulWidget {
+  const User_profile_edit_blog_page_({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return User_profile_edit_blog_page_setting_();
@@ -40,11 +42,11 @@ class User_profile_edit_blog_page_setting_
     return Scaffold(
         backgroundColor: colorBackGround_1_,
         bottomNavigationBar: Custom_navbar_1_(2),
-        body: Container(
+        body: SizedBox(
           width: width_,
           height: height_,
           child: SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               // margin: EdgeInsets.only(bottom: 100),
               width: width_,
               height: (height_ - 100),
@@ -86,7 +88,7 @@ class User_profile_edit_blog_page_setting_
                           itemBuilder: (context, index) {
                             return myBlogItem_ == null
                                 ? Container(
-                                    child: Center(child: Custom_text_1_(errNofitication_==null?"load....":errNofitication_,colorBackGround_2_,sizeText_3_)),
+                                    child: Center(child: Custom_text_1_(errNofitication_ ?? "load....",colorBackGround_2_,sizeText_3_)),
                                   )
                                 : Custom_blog_card(
                                     myBlogItem_[index]["title_"],

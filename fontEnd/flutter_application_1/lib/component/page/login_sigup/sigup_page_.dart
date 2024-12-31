@@ -1,13 +1,10 @@
-import 'dart:math';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/component/custom_state/custom_button_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_text_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_text_field_1_.dart';
 import 'package:flutter_application_1/function/function_login_sigup_.dart';
 import 'package:flutter_application_1/setting/setting_varilabel_.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Sigup_page_ extends StatefulWidget {
   const Sigup_page_({super.key});

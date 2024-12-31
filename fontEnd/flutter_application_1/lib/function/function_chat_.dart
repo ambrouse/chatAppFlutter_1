@@ -9,17 +9,15 @@ Future<dynamic> functionGetChat(linkuser_) async {
   String token_ = sharedPreferences.getString("jwtToken_").toString();
   try {
     Response response = await dio.get(
-        "http://10.0.2.2:9090/chat_app/api/v1/chat/" +
-            linkuser_ +
-            "/" +
-            idUser_,
+        "${"http://10.0.2.2:9090/chat_app/api/v1/chat/" +
+            linkuser_}/$idUser_",
         data: {},
         options: Options(
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return response;
   } on DioException catch (e) {
-    return e?.response;
+    return e.response;
   }
 }
 
@@ -41,7 +39,7 @@ Future<dynamic> functionSendChat(idFriend_, content_) async {
             headers: {'Authorization': ""}));
     return response;
   } on DioException catch (e) {
-    return e?.response;
+    return e.response;
   }
 }
 

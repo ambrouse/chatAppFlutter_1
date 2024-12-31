@@ -9,14 +9,14 @@ Future<dynamic> functionGetUserInfo() async {
   String token_ = sharedPreferences.getString("jwtToken_").toString();
   try {
     Response response = await dio.get(
-        "http://10.0.2.2:9090/chat_app/api/v1/user/" + idUser_,
+        "http://10.0.2.2:9090/chat_app/api/v1/user/$idUser_",
         data: {},
         options: Options(
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return [true, response];
   } on DioException catch (e) {
-    return [false, e?.response];
+    return [false, e.response];
   }
 }
 
@@ -49,7 +49,7 @@ Future<dynamic> functionUpdateUser(
             headers: {'Authorization': ""}));
     return [true, response];
   } on DioException catch (e) {
-    return [false, e?.response];
+    return [false, e.response];
   }
 }
 
@@ -60,14 +60,14 @@ Future<dynamic> functionGeMyBlog() async {
   String token_ = sharedPreferences.getString("jwtToken_").toString();
   try {
     Response response = await dio.get(
-        "http://10.0.2.2:9090/chat_app/api/v1/my_blog/" + idUser_,
+        "http://10.0.2.2:9090/chat_app/api/v1/my_blog/$idUser_",
         data: {},
         options: Options(
             headers: {'Authorization': ""},
             contentType: Headers.jsonContentType));
     return [true, response];
   } on DioException catch (e) {
-    return [false, e?.response];
+    return [false, e.response];
   }
 }
 
@@ -75,14 +75,14 @@ Future<dynamic> functionGeMyBlogDetail(String idBlog_) async {
   final dio = Dio();
   try {
     Response response = await dio.get(
-        "http://10.0.2.2:9090/chat_app/api/v1/my_blog_detail/" + idBlog_,
+        "http://10.0.2.2:9090/chat_app/api/v1/my_blog_detail/$idBlog_",
         data: {},
         options: Options(
             headers: {'Authorization': ""},
             contentType: Headers.jsonContentType));
     return [true, response];
   } on DioException catch (e) {
-    return [false, e?.response];
+    return [false, e.response];
   }
 }
 
@@ -104,7 +104,7 @@ Future<dynamic> functionUpdateMyBlog(
             headers: {'Authorization': ""}));
     return [true, response];
   } on DioException catch (e) {
-    return [false, e?.response];
+    return [false, e.response];
   }
 }
 
@@ -112,14 +112,14 @@ Future<dynamic> functionDeleteMyBlog(String idBlog_) async {
   final dio = Dio();
   try {
     Response response = await dio.delete(
-        "http://10.0.2.2:9090/chat_app/api/v1/my_blog_detail/" + idBlog_,
+        "http://10.0.2.2:9090/chat_app/api/v1/my_blog_detail/$idBlog_",
         data: {},
         options: Options(
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return [true, response];
   } on DioException catch (e) {
-    return [false, e?.response];
+    return [false, e.response];
   }
 }
 
@@ -130,14 +130,14 @@ Future<dynamic> functionGetRequestFriend() async {
   String token_ = sharedPreferences.getString("jwtToken_").toString();
   try {
     Response response = await dio.get(
-        "http://10.0.2.2:9090/chat_app/api/v1/request_friend/" + idUser_,
+        "http://10.0.2.2:9090/chat_app/api/v1/request_friend/$idUser_",
         data: {},
         options: Options(
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return [true, response];
   } on DioException catch (e) {
-    return [false, e?.response];
+    return [false, e.response];
   }
 }
 
@@ -145,15 +145,14 @@ Future<dynamic> functionDeleteRequestFriend(String idRequestFriend_) async {
   final dio = Dio();
   try {
     Response response = await dio.delete(
-        "http://10.0.2.2:9090/chat_app/api/v1/request_friend/" +
-            idRequestFriend_,
+        "http://10.0.2.2:9090/chat_app/api/v1/request_friend/$idRequestFriend_",
         data: {},
         options: Options(
             contentType: Headers.jsonContentType,
             headers: {'Authorization': ""}));
     return [true, response];
   } on DioException catch (e) {
-    return [false, e?.response];
+    return [false, e.response];
   }
 }
 
@@ -168,6 +167,6 @@ Future<dynamic> functionApplyRequestFriend(String idRequestFriend_) async {
             headers: {'Authorization': ""}));
     return [true, response];
   } on DioException catch (e) {
-    return [false, e?.response];
+    return [false, e.response];
   }
 }

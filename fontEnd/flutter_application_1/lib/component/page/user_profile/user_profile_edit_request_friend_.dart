@@ -10,6 +10,8 @@ import 'package:flutter_application_1/function/function_profile_user_.dart';
 import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 
 class User_profile_edit_request_friend_ extends StatefulWidget {
+  const User_profile_edit_request_friend_({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return User_profile_edit_request_friend_setting_();
@@ -39,7 +41,7 @@ class User_profile_edit_request_friend_setting_
       backgroundColor: colorBackGround_1_,
       bottomNavigationBar: Custom_navbar_1_(2),
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: width_,
           height: (height_ - 100),
           child: Column(

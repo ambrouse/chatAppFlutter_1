@@ -11,6 +11,8 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
 
 class Chat_page_ extends StatefulWidget {
+  const Chat_page_({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return Chat_page_setting_();
@@ -92,7 +94,7 @@ class Chat_page_setting_ extends State<Chat_page_> {
       backgroundColor: colorBackGround_1_,
       bottomNavigationBar: Custom_navbar_1_(1),
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: width_,
           height: (height_ - 100),
           child: Column(
@@ -131,7 +133,7 @@ class Chat_page_setting_ extends State<Chat_page_> {
                                       colorBackGround_2_, sizeText_2_),
                                 )
                               : Center(
-                                  child: Container(
+                                  child: SizedBox(
                                     width: (width_ / 1.1),
                                     child: ListView.builder(
                                         controller: scrollController,
@@ -208,7 +210,7 @@ class Chat_page_setting_ extends State<Chat_page_> {
                   width: width_,
                   height: 60,
                   alignment: Alignment.center,
-                  child: Container(
+                  child: SizedBox(
                       width: (width_ / 1.1),
                       height: 30,
                       child: Row(
@@ -222,10 +224,10 @@ class Chat_page_setting_ extends State<Chat_page_> {
                               flex: 2,
                               child: InkWell(
                                 onTap: () {
-                                  if (!textEditingControllerChat_.text
+                                  if (textEditingControllerChat_.text
                                       .split(" ")
                                       .last
-                                      .isEmpty) {
+                                      .isNotEmpty) {
                                     functionSendChat(idUserFriend_,
                                             textEditingControllerChat_.text)
                                         .then((data_) {
@@ -236,7 +238,7 @@ class Chat_page_setting_ extends State<Chat_page_> {
                                             chat_ = data;
                                             checkScron_ = true;
                                             webSocket_.sink.add(
-                                                idUser_ + " " + idUserFriend_);
+                                                "$idUser_ $idUserFriend_");
                                           });
                                           textEditingControllerChat_.text = "";
                                         });

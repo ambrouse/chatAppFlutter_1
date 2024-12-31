@@ -57,11 +57,11 @@ class Custom_blog_card_setting extends State<Custom_blog_card> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  child: Custom_text_1_("like : " + widget.like_,
+                  child: Custom_text_1_("like : ${widget.like_}",
                       colorBackGround_1_, sizeText_1_),
                 ),
                 Container(
-                  child: Custom_text_1_("heart : " + widget.heart_,
+                  child: Custom_text_1_("heart : ${widget.heart_}",
                       colorBackGround_1_, sizeText_1_),
                 ),
               ],

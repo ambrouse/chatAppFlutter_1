@@ -14,6 +14,8 @@ import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 // import 'package:image_field/image_field.dart';
 
 class User_profile_edit_ extends StatefulWidget {
+  const User_profile_edit_({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return User_profile_edit_setting_();
@@ -98,7 +100,7 @@ class User_profile_edit_setting_ extends State<User_profile_edit_> {
                 ),
               ),
               Center(
-                child: Container(
+                child: SizedBox(
                   width: (width_ / 1.3),
                   child: Column(
                     children: [

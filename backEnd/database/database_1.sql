@@ -18,7 +18,7 @@ CREATE TABLE [user_] (
   [id_authentication_] varchar(60),
   [name_] nvarchar(255),
   [age_] int,
-  link_img_ nvarchar(max),
+  link_img_ text,
   [status_delete_] tinyint,
   [day_delete_] datetime
 )
@@ -40,7 +40,7 @@ CREATE TABLE [blog_] (
   [content_] nvarchar(max),
   [status_] int,
   day_blog_ datetime,
-  link_img_ nvarchar(max),
+  link_img_ text,
   [status_delete_] tinyint,
   [day_delete_] datetime
 )
@@ -146,11 +146,11 @@ insert into authentication_ (id_,email_,password_,status_delete_) values
 
 go
 insert into user_ (id_,name_,age_,id_authentication_,status_delete_,link_img_) values 
-('user_1','test name 1',19,'au_1',1,'/data/user/0/com.example.flutter_application_1/app_flutter/user_1_myProfileAvarta.png'),
-('user_2','test name 2',20,'au_2',1,'/data/user/0/com.example.flutter_application_1/app_flutter/user_1_myProfileAvarta.png'),
-('user_3','test name 3',21,'au_3',1,'/data/user/0/com.example.flutter_application_1/app_flutter/user_1_myProfileAvarta.png'),
-('user_4','test name 4',22,'au_4',1,'/data/user/0/com.example.flutter_application_1/app_flutter/user_1_myProfileAvarta.png'),
-('user_5','test name 5',23,'au_5',1,'/data/user/0/com.example.flutter_application_1/app_flutter/user_1_myProfileAvarta.png')
+('user_1','test name 1',19,'au_1',1,'1'),
+('user_2','test name 2',20,'au_2',1,'1'),
+('user_3','test name 3',21,'au_3',1,'1'),
+('user_4','test name 4',22,'au_4',1,'1'),
+('user_5','test name 5',23,'au_5',1,'1')
 
 go
 insert into link_user_ (id_,id_user_,id_user_friend_,status_delete_) values
@@ -159,37 +159,6 @@ insert into link_user_ (id_,id_user_,id_user_friend_,status_delete_) values
 ('link_user_3','user_3','user_4',1),
 ('link_user_4','user_4','user_3',1)
 
-go
-insert into blog_ (id_,id_user_,title_,content_,status_,status_delete_,link_img_) values
-('blog_1','user_1','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1,'/data/user/0/com.example.flutter_application_1/app_flutter/user_1_myProfileAvarta.png'),
-('blog_2','user_2','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1,'/data/user/0/com.example.flutter_application_1/app_flutter/user_1_myProfileAvarta.png'),
-('blog_3','user_3','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1,'/data/user/0/com.example.flutter_application_1/app_flutter/user_1_myProfileAvarta.png'),
-('blog_4','user_4','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1,'/data/user/0/com.example.flutter_application_1/app_flutter/user_1_myProfileAvarta.png'),
-('blog_5','user_5','test title 1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1,1,'/data/user/0/com.example.flutter_application_1/app_flutter/user_1_myProfileAvarta.png')
-
-go
-insert into heart_(id_,id_user_,id_blog_,status_delete_) values 
-('heart_1','user_1','blog_1',1),
-('heart_2','user_2','blog_2',1),
-('heart_3','user_3','blog_3',1),
-('heart_4','user_4','blog_4',1),
-('heart_5','user_5','blog_5',1)
-
-go
-insert into like_(id_,id_user_,id_blog_,status_delete_) values 
-('like_1','user_1','blog_1',1),
-('like_2','user_2','blog_2',1),
-('like_3','user_3','blog_3',1),
-('like_4','user_4','blog_4',1),
-('like_5','user_5','blog_5',1)
-
-go
-insert into coment_(id_,id_user_,id_blog_,content_,status_delete_) values 
-('coment_1','user_1','blog_1','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1),
-('coment_2','user_2','blog_2','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1),
-('coment_3','user_3','blog_3','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1),
-('coment_4','user_4','blog_4','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1),
-('coment_5','user_5','blog_5','Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet blanditiis non dolor placeat ducimus nulla adipisci iusto eum repellendus. Quod, nesciunt enim. Reprehenderit vero minima commodi, voluptatum nobis similique perspiciatis.',1)
 
 go
 insert into chat_(id_,id_user_receive_,content_,day_send_,status_delete_,id_user_send_) values

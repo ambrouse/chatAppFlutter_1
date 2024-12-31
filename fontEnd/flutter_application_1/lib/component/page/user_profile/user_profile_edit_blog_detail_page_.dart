@@ -13,6 +13,8 @@ import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 import 'package:path_provider/path_provider.dart';
 
 class User_profile_edit_blog_detail_page_ extends StatefulWidget {
+  const User_profile_edit_blog_detail_page_({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return User_profile_edit_blog_detail_page_setting_();
@@ -21,7 +23,7 @@ class User_profile_edit_blog_detail_page_ extends StatefulWidget {
 
 Future<String> test(String path) async {
   var a = await getApplicationDocumentsDirectory();
-  return a.path + "/" + path;
+  return "${a.path}/$path";
 }
 
 class User_profile_edit_blog_detail_page_setting_
@@ -89,7 +91,7 @@ class User_profile_edit_blog_detail_page_setting_
                       : Container(
                           margin: EdgeInsets.only(top: 10),
                           width: (width_ / 1.3),
-                          child: Container(
+                          child: SizedBox(
                             height: 30,
                             child: Custom_text_field(
                                 textEditingControllerTitle_,
@@ -114,7 +116,7 @@ class User_profile_edit_blog_detail_page_setting_
                       : Container(
                           margin: EdgeInsets.only(top: 10),
                           width: (width_ / 1.3),
-                          child: Container(
+                          child: SizedBox(
                             height: 100,
                             child: Custom_text_field(
                                 textEditingControllerContent_,

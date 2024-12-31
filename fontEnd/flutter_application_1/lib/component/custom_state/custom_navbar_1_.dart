@@ -21,7 +21,7 @@ class Custom_navbar_1_setting_ extends State<Custom_navbar_1_> {
         });
       },
       backgroundColor: const Color.fromARGB(0, 0, 0, 0),
-      indicatorColor: colorBackGround_2_,
+      indicatorColor: const Color.fromARGB(255, 1, 78, 27),
       selectedIndex: widget.currentPageIndex,
       height: 60,
       destinations: const <Widget>[

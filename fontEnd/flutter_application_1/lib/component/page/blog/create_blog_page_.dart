@@ -11,6 +11,8 @@ import 'package:flutter_application_1/function/function_blog_.dart';
 import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 
 class Create_blog_page_ extends StatefulWidget {
+  const Create_blog_page_({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return Create_blog_page_setting_();
@@ -58,7 +60,7 @@ class Create_blog_page_setting_ extends State<Create_blog_page_> {
             Container(
               margin: EdgeInsets.only(top: 10),
               width: (width_ / 1.3),
-              child: Container(
+              child: SizedBox(
                 height: 30,
                 child: Custom_text_field(textEditingControllerTitle_, "", 1),
               ),
@@ -67,7 +69,7 @@ class Create_blog_page_setting_ extends State<Create_blog_page_> {
               child: Container(
                 margin: EdgeInsets.only(top: 10),
                 width: (width_ / 1.3),
-                child: Container(
+                child: SizedBox(
                   height: 30,
                   child: Custom_text_1_(errTitle_, Colors.red, sizeText_1_),
                 ),
@@ -84,7 +86,7 @@ class Create_blog_page_setting_ extends State<Create_blog_page_> {
             Container(
               margin: EdgeInsets.only(top: 10),
               width: (width_ / 1.3),
-              child: Container(
+              child: SizedBox(
                 height: 100,
                 child: Custom_text_field(textEditingControllerContent_, "", 5),
               ),
@@ -93,7 +95,7 @@ class Create_blog_page_setting_ extends State<Create_blog_page_> {
               child: Container(
                 margin: EdgeInsets.only(top: 10),
                 width: (width_ / 1.3),
-                child: Container(
+                child: SizedBox(
                   height: 30,
                   child: Custom_text_1_(errContent_, Colors.red, sizeText_1_),
                 ),
@@ -133,7 +135,7 @@ class Create_blog_page_setting_ extends State<Create_blog_page_> {
               child: Container(
                 margin: EdgeInsets.only(top: 10),
                 width: (width_ / 1.3),
-                child: Container(
+                child: SizedBox(
                   height: 30,
                   child: Custom_text_1_(errImage_, Colors.red, sizeText_1_),
                 ),
