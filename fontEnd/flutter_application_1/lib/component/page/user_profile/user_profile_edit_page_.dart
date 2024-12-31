@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/component/custom_state/custom_back_button_1_.dart';
@@ -8,7 +7,6 @@ import 'package:flutter_application_1/component/custom_state/custom_img_field_1_
 import 'package:flutter_application_1/component/custom_state/custom_navbar_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_text_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_text_field_1_.dart';
-import 'package:flutter_application_1/component/page/user_profile/user_profile_root_page_.dart';
 import 'package:flutter_application_1/function/function_profile_user_.dart';
 import 'package:flutter_application_1/setting/setting_varilabel_.dart';
 // import 'package:image_field/image_field.dart';

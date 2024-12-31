@@ -1,9 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/component/custom_state/custom_back_button_1_.dart';
-import 'package:flutter_application_1/component/custom_state/custom_button_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_navbar_1_.dart';
 import 'package:flutter_application_1/component/custom_state/custom_text_1_.dart';
 import 'package:flutter_application_1/function/function_profile_user_.dart';

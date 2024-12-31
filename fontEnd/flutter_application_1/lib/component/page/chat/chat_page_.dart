@@ -7,8 +7,6 @@ import 'package:flutter_application_1/component/custom_state/custom_text_field_1
 import 'package:flutter_application_1/function/function_chat_.dart';
 import 'package:flutter_application_1/function/function_profile_user_.dart';
 import 'package:flutter_application_1/setting/setting_varilabel_.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:web_socket_channel/status.dart' as status;
 
 class Chat_page_ extends StatefulWidget {
   const Chat_page_({super.key});
